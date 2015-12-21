@@ -4,9 +4,16 @@ package cz.sazel.hellokotlin
  * Created by wojta on 15.12.15.
  */
 fun main(args : Array<String>) {
-    val pokusik= Pokusik()
+    val hello= Hello()
     println("Hello, world!")
-    println(pokusik.test)
-    pokusik.test="xx"
-    println(pokusik.test)
+    println(hello.test)
+    hello.test="xx"
+    println(hello.test)
+
+
+    val shared=SharedClass("Shared class experiment")
+    shared.number=1234
+    shared.printMe()
 }
+
+
