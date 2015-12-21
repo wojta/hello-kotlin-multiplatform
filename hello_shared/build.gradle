@@ -22,7 +22,6 @@ println("Gradle module: $module_name")
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.sourceMap = true
-    kotlinOptions.outputFile = "$output_dir/hello_shared.js"
     kotlinOptions.suppressWarnings = true
     kotlinOptions.verbose = true
 }
@@ -40,19 +39,31 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
 }
 
+
+
 if (module_name.equals("hello_js")) {
     //JavaScript specific part
 
-    task jarSources(type: Jar) {
+
+    def outDir = "${buildDir}/kotlin2js/main/"
+
+    compileKotlin2Js.kotlinOptions.outputFile = outDir + "hello_shared.js"
+
+    task jarSources(type:Jar){
         from sourceSets.main.allSource
         classifier = 'source'
+    }
+
+    artifacts {
+        compile jarSources
     }
 
     jar {
         from sourceSets.main.allSource
         include "**/*.kt"
 
-        from "$output_dir/lib"
+
+        from outDir
         include "**/*.js"
 
         manifest {

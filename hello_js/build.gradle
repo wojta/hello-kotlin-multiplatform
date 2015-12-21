@@ -24,13 +24,14 @@ dependencies {
     compile project(":hello_shared")
 }
 
+jar.dependsOn(compileKotlin2Js)
 
 task copyJsFilesFromDependencies(dependsOn: build) {
     try {
         configurations.compile.each { File file ->
             copy {
                 includeEmptyDirs = true
-
+                println("cmp: ${file.absolutePath}")
                 from zipTree(file.absolutePath)
                 into "$output_dir/lib"
                 include { fileTreeElement ->
@@ -43,6 +44,8 @@ task copyJsFilesFromDependencies(dependsOn: build) {
         System.err.println(e.getMessage())
     }
 }
+
+
 
 task run(type: Exec) {
     def dir = "${projectDir}/../web"
