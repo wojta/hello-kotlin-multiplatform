@@ -1,0 +1,76 @@
+apply plugin: 'java'
+apply plugin: 'kotlin'
+//apply plugin: 'application'
+apply plugin: 'kotlin2js'
+
+def output_dir = "${projectDir}/../web/js"
+
+//determine name of module in the task that was called to determine JavaScript or Java specific parts of compilation (suggest replacement if you know Gradle better)
+def moduleName = { ->
+    //used in IntelliJ (it's null when used on command line)
+    def path = project.gradle.startParameter.projectDir?.path
+    //from command line
+    def taskName = project.gradle.startParameter.taskNames.size()>0?project.gradle.startParameter.taskNames.get(0):null;
+    return path != null ? path.substring(path.lastIndexOf('/') + 1) : taskName?.substring(0, taskName.lastIndexOf(":"))
+}
+
+def module_name = moduleName()
+
+println("Gradle module: $module_name")
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.outputFile = "$output_dir/hello_shared.js"
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.verbose = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    ext.kotlin_version = '1.0.0-beta-3595'
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
+}
+
+if (module_name.equals("hello_js")) {
+    //JavaScript specific part
+
+    task jarSources(type: Jar) {
+        from sourceSets.main.allSource
+        classifier = 'source'
+    }
+
+    jar {
+        from sourceSets.main.allSource
+        include "**/*.kt"
+
+        from "$output_dir/lib"
+        include "**/*.js"
+
+        manifest {
+            attributes(
+                    "Specification-Title": "Kotlin Hello Shared code",
+                    "Kotlin-JS-Module-Name": "hello_shared"
+            )
+        }
+    }
+
+    jar.dependsOn(compileKotlin2Js)
+} else if (module_name!=null) {
+    //Java specific part
+    jar {
+        manifest {
+            attributes 'Main-Class': 'cz.sazel.hellokotlin.MainKt'
+        }
+
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+    }
+}

@@ -1,0 +1,54 @@
+apply plugin: 'kotlin2js'
+
+def output_dir = "${projectDir}/../web/js"
+
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.outputFile = "$output_dir/hello.js"
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.verbose = true
+}
+
+buildscript {
+    ext.kotlin_version = '1.0.0-beta-3595'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
+    compile project(":hello_shared")
+}
+
+
+task copyJsFilesFromDependencies(dependsOn: build) {
+    try {
+        configurations.compile.each { File file ->
+            copy {
+                includeEmptyDirs = true
+
+                from zipTree(file.absolutePath)
+                into "$output_dir/lib"
+                include { fileTreeElement ->
+                    def path = fileTreeElement.path
+                    path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+                }
+            }
+        }
+    } catch (Exception e) {
+        System.err.println(e.getMessage())
+    }
+}
+
+task run(type: Exec) {
+    def dir = "${projectDir}/../web"
+    workingDir(dir)
+    commandLine 'google-chrome', dir + "/index.html"
+
+}
+
+run.dependsOn(build)

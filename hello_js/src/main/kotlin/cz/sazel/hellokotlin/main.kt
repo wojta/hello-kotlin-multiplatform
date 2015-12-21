@@ -17,3 +17,7 @@ fun main(args : Array<String>) {
 }
 
 
+fun test() {
+    print("hello2")
+}
+
