@@ -34,5 +34,5 @@ It was checked only under Linux Mint, probably there won't be any problems with 
     
     # ./gradlew tasks --all
     
-### License
+## License
 Do whathever you want with this. 
