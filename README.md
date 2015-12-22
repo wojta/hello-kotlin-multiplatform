@@ -4,9 +4,9 @@ This project demonstrates sharing runtime independent code between different Kot
 
 Mostly it's inspired by Jetbrains' code - [here](https://github.com/JetBrains/kotlin/tree/master/libraries/tools/kotlin-gradle-plugin/src/test/resources/testProject/kotlin2JsProject) 
 
-## What is Kotlin
+## What is Kotlin?
 ![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
-[Kotlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is (currently experimental) support for [Javascript](https://en.wikipedia.org/wiki/JavaScript) transpilation. 
+[otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is (currently experimental) support for [Javascript](https://en.wikipedia.org/wiki/JavaScript) transpilation. 
 
 ## What is it doing?
 * writes Hello World!
@@ -19,9 +19,8 @@ Mostly it's inspired by Jetbrains' code - [here](https://github.com/JetBrains/ko
 * ``hello_shared`` - shared Kotlin code (calculating prime numbers)
 * ``web`` - demo web page for JavaScript version
 
-## How it works
+## How it works?
 Currently it's done by terrible hack in [hello_shared/build.gradle](https://github.com/wojta/hello-kotlin/blob/master/hello_shared/build.gradle). We need different build process in ``hello_shared`` module. It's determined by name of the task that was started. I would be happy, if anyone can suggest a better solution.
-
 
 ## Building and running the demo
 It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
