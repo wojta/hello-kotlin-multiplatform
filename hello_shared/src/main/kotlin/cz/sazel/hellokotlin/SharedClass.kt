@@ -11,16 +11,22 @@ class SharedClass(val console: IConsole) {
     public var text: String = ""
 
     public fun printMe() {
-        console.println("This is a shared code between JavaScript and Java Kotlin text:[$text] and number:[$number]")
+        console.println("Hello Kotlin!\nThis is a shared code between JavaScript/Java/Android runtimes:[$text] and number:[$number]")
     }
 
-
+    /**
+     * Prints first n prime numbers to console.
+     * @param n number of primes
+     */
     public fun printPrimes(n: Long) {
-        console.println("Printing all $n primes");
-        for (i in calcPrime(n)) console.println("$i");
+        for (i in calcPrimes(n)) console.println("$i");
     }
 
-    private fun calcPrime(n: Long): List<Long> {
+    /**
+     * Calculates first n prime numbers
+     * @param n number of primes
+     */
+    public  fun calcPrimes(n: Long): List<Long> {
 
         val primes: MutableList<Long>
         primes = arrayListOf<Long>();
@@ -29,7 +35,7 @@ class SharedClass(val console: IConsole) {
         var c = 1;
         var p = 3.0;
 
-        var prime = false
+        var prime:Boolean
 
         while (true) {
             // Check if $p is prime

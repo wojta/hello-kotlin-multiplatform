@@ -1,1 +1,1 @@
-include ':hello_java',':hello_js',':hello_shared'
+include ':hello_java',':hello_js',':hello_shared', ':hello_android'

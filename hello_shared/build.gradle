@@ -1,10 +1,7 @@
 apply plugin: 'java'
-apply plugin: 'kotlin'
-//apply plugin: 'application'
-apply plugin: 'kotlin2js'
-
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 def output_dir = "${projectDir}/../web/js"
-
 //determine name of module in the task that was called to determine JavaScript or Java specific parts of compilation (suggest replacement if you know Gradle better)
 def moduleName = { ->
     //used in IntelliJ (it's null when used on command line)
@@ -14,42 +11,33 @@ def moduleName = { ->
     def posSemicolon = taskName?.lastIndexOf(":")
     return path != null ? path.substring(path.lastIndexOf('/') + 1) : taskName?.substring(0, posSemicolon > 0 ? posSemicolon : 0)
 }
-
 def module_name = moduleName()
-
-println("Gradle module: $module_name")
-
-compileKotlin2Js {
-    kotlinOptions.metaInfo = true
-    kotlinOptions.sourceMap = true
-    kotlinOptions.suppressWarnings = true
-    kotlinOptions.verbose = true
-}
-
 repositories {
     mavenCentral()
 }
-
 buildscript {
     ext.kotlin_version = '1.0.0-beta-3595'
 }
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
-}
-
-
-
 if (module_name.equals("hello_js")) {
     //JavaScript specific part
+    apply plugin: 'kotlin2js'
+    println("Kotlin JavaScript Compilation")
+    compileKotlin2Js {
+        kotlinOptions.metaInfo = true
+        kotlinOptions.sourceMap = true
+        kotlinOptions.suppressWarnings = true
+        kotlinOptions.verbose = true
+    }
 
+    dependencies {
+        compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
+    }
 
     def outDir = "${buildDir}/kotlin2js/main/"
 
     compileKotlin2Js.kotlinOptions.outputFile = outDir + "hello_shared.js"
 
-    task jarSources(type:Jar){
+    task jarSources(type: Jar) {
         from sourceSets.main.allSource
         classifier = 'source'
     }
@@ -77,6 +65,25 @@ if (module_name.equals("hello_js")) {
     jar.dependsOn(compileKotlin2Js)
 } else if (module_name != null) {
     //Java specific part
+    apply plugin: 'kotlin'
+
+    println("Kotlin Java Compilation")
+
+    configurations {
+        provided
+    }
+
+    sourceSets {
+        main {
+            compileClasspath += configurations.provided
+            runtimeClasspath += configurations.provided
+        }
+    }
+
+    dependencies {
+        provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    }
+
     jar {
         manifest {
             attributes 'Main-Class': 'cz.sazel.hellokotlin.MainKt'
