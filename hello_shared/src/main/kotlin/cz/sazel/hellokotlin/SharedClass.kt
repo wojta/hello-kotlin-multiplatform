@@ -24,7 +24,7 @@ class SharedClass(val console: IConsole) {
 
     /**
      * Calculates first n prime numbers
-     * @see <a href="http://www.paul-scott.com/nth-prime.php">Source code ported from this PHP version</a>
+     * @see <a href="http://www.paul-scott.com/nth-prime.php">Source code inspired by this PHP version</a>
      * @param n number of primes
      */
     public  fun calcPrimes(n: Long): List<Long> {
