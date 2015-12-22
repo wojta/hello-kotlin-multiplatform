@@ -5,8 +5,8 @@ This project demonstrates sharing runtime independent code between different Kot
 Mostly it's inspired by Jetbrains' code - [here](https://github.com/JetBrains/kotlin/tree/master/libraries/tools/kotlin-gradle-plugin/src/test/resources/testProject/kotlin2JsProject) 
 
 ## What is Kotlin?
-![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
-[otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is (currently experimental) support for [Javascript](https://en.wikipedia.org/wiki/JavaScript) transpilation. 
+[![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
+otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is (currently experimental) support for [Javascript](https://en.wikipedia.org/wiki/JavaScript) transpilation. 
 
 ## What is it doing?
 * writes Hello World!
