@@ -24,6 +24,7 @@ class SharedClass(val console: IConsole) {
 
     /**
      * Calculates first n prime numbers
+     * @see <a href="http://www.paul-scott.com/nth-prime.php">Source code ported from this PHP version</a>
      * @param n number of primes
      */
     public  fun calcPrimes(n: Long): List<Long> {
@@ -38,7 +39,7 @@ class SharedClass(val console: IConsole) {
         var prime:Boolean
 
         while (true) {
-            // Check if $p is prime
+            // Check if p is prime
             prime = true;
             val sqrt = Math.sqrt(p)
             (1..c).filter { j -> primes[j-1] < sqrt }.forEach { i ->
@@ -47,7 +48,7 @@ class SharedClass(val console: IConsole) {
                     return@forEach
                 }
             }
-            // Record $p if prime
+            // Record p if prime
             if (prime) {
                 primes.add(p.toLong());
                 c++
@@ -56,7 +57,7 @@ class SharedClass(val console: IConsole) {
                 }
             }
 
-            // Next $p to check
+            // Next p to check
             p += 2;
         }
         return primes.toList();
