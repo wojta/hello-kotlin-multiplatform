@@ -30,7 +30,8 @@ You can use Android Studio to run the application. To build from command line, y
 
     # ./gradlew hello_android:build
 
-Build file is located in your ``build/hello-kotlin/hello_android/outputs/apk`` 
+and APK file is located in your ``build`` directory.
+
 ![Hello Android]
 (https://raw.githubusercontent.com/wojta/hello-kotlin/master/.images/hello_android.png)
     
