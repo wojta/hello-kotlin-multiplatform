@@ -3,7 +3,8 @@ package cz.sazel.hellokotlin
 import cz.sazel.hellokotlin.console.IConsole
 
 /**
- * Created by wojta on 15.12.15.
+ * Shared multiplatform code written in Kotlin
+ * @param console you need to pass some IConsole for printing things.
  */
 class SharedClass(val console: IConsole) {
 

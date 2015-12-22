@@ -14,6 +14,9 @@ import cz.sazel.hellokotlin.console.Console
 import org.jetbrains.anko.async
 import org.jetbrains.anko.uiThread
 
+/**
+ * In Android this activity is a start point.
+ */
 class MainActivity : AppCompatActivity() {
 
     @Bind(R.id.tvConsole)

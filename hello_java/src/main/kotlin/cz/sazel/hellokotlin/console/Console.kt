@@ -1,11 +1,12 @@
 package cz.sazel.hellokotlin.console
 
 /**
- * Created by wojta on 21.12.15.
+ * Console for Java console version.
  */
 class Console:IConsole {
 
     override fun println(s: String) {
+        //just print text to output
         System.out.println(s)
     }
 }

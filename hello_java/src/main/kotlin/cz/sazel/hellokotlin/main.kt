@@ -3,7 +3,7 @@ package cz.sazel.hellokotlin
 import cz.sazel.hellokotlin.console.Console
 
 /**
- * Created by wojta on 15.12.15.
+ * main function for Java
  */
 fun main(args : Array<String>) {
     val shared=SharedClass(Console())
