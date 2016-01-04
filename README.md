@@ -20,7 +20,7 @@ otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains]
 * ``web`` - demo web page for JavaScript version
 
 ## How it works?
-Currently it's done by terrible hack in [hello_shared/build.gradle](https://github.com/wojta/hello-kotlin/blob/master/hello_shared/build.gradle). We need different build process in ``hello_shared`` module. It's determined by name of the task that was started. I would be happy, if anyone can suggest a better solution.
+Currently it's done by terrible hack in [hello_shared/build.gradle](hello_shared/build.gradle). We need different build process in ``hello_shared`` module. It's determined by name of the task that was started. I would be happy, if anyone can suggest a better solution.
 
 ## Building and running the demo
 It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
@@ -33,21 +33,21 @@ You can use Android Studio to run the application. To build from command line, y
 and APK file is located in your ``build`` directory.
 
 ![Hello Android]
-(https://raw.githubusercontent.com/wojta/hello-kotlin/master/.images/hello_android.png)
+(.images/hello_android.png)
     
 ### Java version
 
     # ./gradlew hello_java:run
 
 ![Hello Java]
-(https://raw.githubusercontent.com/wojta/hello-kotlin/master/.images/hello_java.png)
+(.images/hello_java.png)
     
 ### JavaScript version (assuming default Google Chrome is installed)
 
     # ./gradlew hello_js:run
 
 ![Hello JavaScript]
-(https://raw.githubusercontent.com/wojta/hello-kotlin/master/.images/hello_js.png)
+(.images/hello_js.png)
 
     
 ### to see all build options    
