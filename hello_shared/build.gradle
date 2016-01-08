@@ -15,10 +15,7 @@ def module_name = moduleName()
 repositories {
     mavenCentral()
 }
-buildscript {
-    ext.kotlin_version = '1.0.0-beta-3595'
-}
-if (module_name.equals("hello_js")) {
+if (module_name.endsWith("hello_js")) {
     //JavaScript specific part
     apply plugin: 'kotlin2js'
     println("Kotlin JavaScript Compilation")
