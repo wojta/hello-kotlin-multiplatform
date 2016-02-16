@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "cz.sazel.hellokotlin"
@@ -34,7 +34,7 @@ kapt {
     generateStubs = true
 }
 
-def anko_version="0.8"
+def anko_version = "0.8.2"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
