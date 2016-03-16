@@ -18,20 +18,9 @@ buildscript {
 
     }
 }
-apply plugin: 'kotlin'
 
 allprojects {
     repositories {
         jcenter()
     }
 }
-repositories {
-    mavenCentral()
-}
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-}
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-}
-

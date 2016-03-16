@@ -1,6 +1,5 @@
 apply plugin: 'java'
 apply plugin: 'kotlin'
-apply plugin: 'application'
 apply plugin: 'ikvm'
 
 
@@ -16,7 +15,6 @@ dependencies {
 
 project.version="1.0"
 
-mainClassName = "cz.sazel.hellokotlin.MainKt"
 
 jar {
     manifest {
@@ -55,7 +53,5 @@ ikvm {
 
     //make executable
     target="exe"
-
-
 
 }
