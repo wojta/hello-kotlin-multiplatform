@@ -12,6 +12,8 @@ dependencies {
     compile project(":hello_shared")
 }
 
+sourceSets.main.kotlin.srcDirs += '../hello_shared/src/main'
+
 mainClassName = "cz.sazel.hellokotlin.MainKt"
 
 

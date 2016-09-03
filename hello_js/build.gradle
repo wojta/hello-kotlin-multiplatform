@@ -1,39 +1,39 @@
 apply plugin: 'kotlin2js'
 
-def output_dir = "${projectDir}/../web/js"
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
+    compile project(":hello_shared")
+    compile project(path: ':hello_java')
+}
 
+sourceSets.main.kotlin.srcDirs += '../hello_shared/src/main'
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.sourceMap = true
-    kotlinOptions.outputFile = "$output_dir/hello.js"
+    kotlinOptions.outputFile = "web/js/hello_js.js"
     kotlinOptions.suppressWarnings = true
     kotlinOptions.verbose = true
 }
 
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
-    compile project(":hello_shared")
-}
-
 jar.dependsOn(compileKotlin2Js)
+
+def output_dir = "web/js"
 
 task copyJsFilesFromDependencies(dependsOn: build) {
     try {
+        //copy all necessary .js files
         configurations.compile.each { File file ->
             copy {
                 includeEmptyDirs = true
                 println("cmp: ${file.absolutePath}")
                 from zipTree(file.absolutePath)
-                into "$output_dir/lib"
+                into "$output_dir"
                 include { fileTreeElement ->
                     def path = fileTreeElement.path
-                    path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+                    def include = path.endsWith(".js") && (path.startsWith("META-INF/resources/") || !path.startsWith("META-INF/"))
+                    if (include) println("unziping $path")
+                    return include
                 }
             }
         }
@@ -42,25 +42,6 @@ task copyJsFilesFromDependencies(dependsOn: build) {
     }
 }
 
-
-
-task run(type: Exec) {
-    def dir = "${projectDir}/../web"
-    workingDir(dir)
-    commandLine 'google-chrome', dir + "/index.html"
-
-}
-
-run.dependsOn(build)
-buildscript {
-    ext.kotlin_version = '1.0.0'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
+clean.doFirst() {
+    delete "$output_dir"
 }

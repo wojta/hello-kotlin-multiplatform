@@ -9,10 +9,11 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile project(':hello_shared')
+    archives project(':hello_shared')
     compile files('lib/mscorlib.jar')
 }
 
+sourceSets.main.kotlin.srcDirs += '../hello_shared/src/main'
 project.version="1.0"
 
 

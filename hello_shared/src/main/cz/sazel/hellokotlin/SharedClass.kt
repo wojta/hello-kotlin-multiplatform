@@ -8,18 +8,18 @@ import cz.sazel.hellokotlin.console.IConsole
  */
 class SharedClass(val console: IConsole) {
 
-    public var number: Number = 0
-    public var text: String = ""
+    var number: Number = 0
+    var text: String = ""
 
-    public fun printMe() {
-        console.println("Hello Kotlin!\nThis is a shared code between JavaScript/Java/Android runtimes:[$text] and number:[$number]")
+    fun printMe() {
+        console.println("Hello Kotlin!\n\nThis is a shared code between JavaScript/JVM/IKVM/Android runtimes:[$text] and number:[$number]")
     }
 
     /**
      * Prints first n prime numbers to console.
      * @param n number of primes
      */
-    public fun printPrimes(n: Long) {
+    fun printPrimes(n: Long) {
         for (i in calcPrimes(n)) console.println("$i");
     }
 
@@ -28,7 +28,7 @@ class SharedClass(val console: IConsole) {
      * @see <a href="http://www.paul-scott.com/nth-prime.php">Source code inspired by this PHP version</a>
      * @param n number of primes
      */
-    public  fun calcPrimes(n: Long): List<Long> {
+    fun calcPrimes(n: Long): List<Long> {
 
         val primes: MutableList<Long>
         primes = arrayListOf<Long>();

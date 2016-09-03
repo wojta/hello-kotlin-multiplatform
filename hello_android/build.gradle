@@ -20,7 +20,8 @@ android {
         }
     }
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += 'src/main/kotlin'
+        main.kotlin.srcDirs += '../hello_shared/src/main'
     }
 
     lintOptions {
@@ -47,6 +48,6 @@ dependencies {
     compile "org.jetbrains.anko:anko-support-v4:$anko_version"
     // In case you need support.v4 bindings
     compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version" // For appcompat-v7 bindings
-    compile project(":hello_shared")
+    archives project(":hello_shared")
 }
 

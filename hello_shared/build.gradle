@@ -1,105 +1,25 @@
-def output_dir = "${projectDir}/../web/js"
-//determine name of module in the task that was called to determine JavaScript or Java specific parts of compilation (suggest replacement if you know Gradle better)
-def moduleName = { ->
-    //used in IntelliJ (it's null when used on command line)
-    def path = project.gradle.startParameter.projectDir?.path
-    //from command line
-    def taskName = project.gradle.startParameter.taskNames.size() > 0 ? project.gradle.startParameter.taskNames.get(0) : null;
-    def posSemicolon = taskName?.lastIndexOf(":")
-    return path != null ? path.substring(path.lastIndexOf('/') + 1) : taskName?.substring(0, posSemicolon > 0 ? posSemicolon : 0)
-}
-def module_name = moduleName()
-repositories {
-    mavenCentral()
-}
-if (module_name.endsWith("hello_js")) {
-    //JavaScript specific part
-    apply plugin: 'kotlin2js'
-    println("Kotlin JavaScript Compilation")
-    compileKotlin2Js {
-        kotlinOptions.metaInfo = true
-        kotlinOptions.sourceMap = true
-        kotlinOptions.suppressWarnings = true
-        kotlinOptions.verbose = true
-    }
+//this module shouldn't be compiled separately at all but it doesn't work without it
+apply plugin: 'kotlin2js'
+apply plugin: 'kotlin'
 
-    dependencies {
-        compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
-    }
-
-    def outDir = "${buildDir}/kotlin2js/main/"
-
-    compileKotlin2Js.kotlinOptions.outputFile = outDir + "hello_shared.js"
-
-    task jarSources(type: Jar) {
-        from sourceSets.main.allSource
-        classifier = 'source'
-    }
-
-    artifacts {
-        compile jarSources
-    }
-
-    jar {
-        from sourceSets.main.allSource
-        include "**/*.kt"
-
-
-        from outDir
-        include "**/*.js"
-
-        manifest {
-            attributes(
-                    "Specification-Title": "Kotlin Hello Shared code",
-                    "Kotlin-JS-Module-Name": "hello_shared"
-            )
-        }
-    }
-
-    jar.dependsOn(compileKotlin2Js)
-} else if (module_name != null) {
-    //Java specific part
-    apply plugin: 'kotlin'
-
-    sourceCompatibility = 1.7
-    targetCompatibility = 1.7
-
-    println("Kotlin Java Compilation")
-
-    configurations {
-        provided
-    }
-
-    sourceSets {
-        main {
-            compileClasspath += configurations.provided
-            runtimeClasspath += configurations.provided
-        }
-    }
-
-    dependencies {
-        provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    }
-
-    jar {
-        manifest {
-            attributes 'Main-Class': 'cz.sazel.hellokotlin.MainKt'
-        }
-
-        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-
-    }
-}
-buildscript {
-    ext.kotlin_version = '1.0.0'
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
 }
 
-sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
+jar.dependsOn(compileKotlin2Js)
+task outJar(type: Jar) {
+    archiveName = "hello_js.jar"
+    from("out") {
+        include '**'
+    }
+    with jar
+}
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.outputFile = "hello_shared/out/hello_shared.js"
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.verbose = true
+
 }
