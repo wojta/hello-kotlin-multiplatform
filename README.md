@@ -15,12 +15,16 @@ otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains]
 ## Structure
 * ``hello_android`` - version for Android runtime
 * ``hello_java`` - version for Java runtime
+* ``hello_ikvm`` - version for IKVM - .NET runtime 
 * ``hello_js`` - version for JavaScript (web browser) runtime
 * ``hello_shared`` - shared Kotlin code (calculating prime numbers)
 * ``web`` - demo web page for JavaScript version
 
 ## How it works?
-Currently it's done by terrible hack in [hello_shared/build.gradle](hello_shared/build.gradle). We need different build process in ``hello_shared`` module. It's determined by name of the task that was started. I would be happy, if anyone can suggest a better solution.
+Currently it's done by using sourcefiles from `hello_shared` module. In older versions, it was done by terrible hack and this approach is much simpler. 
+
+Unfortunately `hello_js` module has still some issues with dependency recognition in IntelliJ, also it requires compile dependency, so the `hello_shared` module gets compiled twice. I hope that there would be some change in `kotlin2js` plugin to allow properly include other source files.
+
 
 ## Building and running the demo
 It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
@@ -37,14 +41,25 @@ and APK file is located in your ``build`` directory.
     
 ### Java version
 
-    # ./gradlew hello_java:run
+    # ./gradlew hello_java:build
+
+You can than run the JAR file using `java -jar` command. 
 
 ![Hello Java]
 (.images/hello_java.png)
-    
-### JavaScript version (assuming default Google Chrome is installed)
 
-    # ./gradlew hello_js:run
+### IKVM version
+
+    # ./gradlew hello_ikvm:ikvm
+
+IKVM is experimental compiler of Java bytecode to .NET bytecode. So this makes `hello_ikvm.exe` file in `hello_ikvm/build/libs` directory. It can be executed on Windows or using Mono/Wine on Linux.
+    
+### JavaScript version 
+
+    # ./gradlew hello_js:build
+
+Web files are stored in `hello_js/web`. 
+You can use some web server or *Open in Browser* option in context menu on file in IntelliJ.  
 
 ![Hello JavaScript]
 (.images/hello_js.png)
