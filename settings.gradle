@@ -1,1 +1,3 @@
-include ':hello_java',':hello_js',':hello_shared', ':hello_android',':hello_ikvm'
+//include ':hello_java', ':hello_jtransc'
+//include ':hello_java',':hello_shared'
+include ':hello_js', ':hello_shared', ':hello_java'
