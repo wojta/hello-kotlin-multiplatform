@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
 
     defaultConfig {
         applicationId "cz.sazel.hellokotlin"
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -19,10 +20,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.kotlin.srcDirs += 'src/main/kotlin'
-        main.kotlin.srcDirs += '../hello_shared/src/main'
-    }
 
     lintOptions {
         abortOnError false
@@ -30,24 +27,15 @@ android {
 
 }
 
-//required for butterknife
-kapt {
-    generateStubs = true
-}
-
-def anko_version = "0.8.2"
+def anko_version = "0.10.1"
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    kapt 'com.jakewharton:butterknife:7.0.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.anko:anko-sdk15:$anko_version"
-    // sdk19, sdk21, sdk23 are also available
-    compile "org.jetbrains.anko:anko-support-v4:$anko_version"
-    // In case you need support.v4 bindings
-    compile "org.jetbrains.anko:anko-appcompat-v7:$anko_version" // For appcompat-v7 bindings
-    archives project(":hello_shared")
+    compile "org.jetbrains.anko:anko:$anko_version"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.19"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.19"
+    compile project(":hello_java")
 }
 
