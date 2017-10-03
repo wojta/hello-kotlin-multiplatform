@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="cz.sazel.hellokotlin.MainActivity">
+
+    <Button
+            android:id="@+id/btStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mat16"
+            android:layout_marginLeft="@dimen/mat16"
+            android:layout_marginStart="@dimen/mat16"
+            android:layout_marginTop="@dimen/mat16"
+            android:text="@string/Start"/>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/btStart">
+
+        <TextView
+                android:id="@+id/tvConsole"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mat16"
+                android:layout_marginStart="@dimen/mat16"
+                tools:text="Hello World!"
+                android:typeface="monospace"/>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,44 @@
+apply plugin: 'kotlin2js'
+
+dependencies {
+    compile 'org.jetbrains.kotlinx:kotlinx-html-js:0.6.2'
+    compile project(':hello_lib_js')
+}
+
+def outputDir = "${projectDir}/web"
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.verbose = true
+    kotlinOptions.main = "call"
+}
+
+task assembleJs(type: Sync) {
+    configurations.compile.each { File file ->
+        from(zipTree(file.absolutePath), {
+            includeEmptyDirs = false
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
+                        !path.startsWith("META-INF/"))
+            }
+        })
+    }
+    from compileKotlin2Js.destinationDir
+    into "${outputDir}/js"
+    dependsOn classes
+}
+
+task assembleResources(type: Sync) {
+    from "src/main/resources" into "web"
+    dependsOn processResources
+}
+
+assemble.dependsOn assembleJs
+assemble.dependsOn assembleResources
+
+clean.doFirst() {
+    delete "$outputDir"
+}
