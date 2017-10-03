@@ -1,25 +1,7 @@
 //this module shouldn't be compiled separately at all but it doesn't work without it
-apply plugin: 'kotlin2js'
-apply plugin: 'kotlin'
+apply plugin: 'kotlin-platform-common'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
-}
-
-jar.dependsOn(compileKotlin2Js)
-task outJar(type: Jar) {
-    archiveName = "hello_js.jar"
-    from("out") {
-        include '**'
-    }
-    with jar
-}
-
-compileKotlin2Js {
-    kotlinOptions.metaInfo = true
-    kotlinOptions.sourceMap = true
-    kotlinOptions.outputFile = "hello_shared/out/hello_shared.js"
-    kotlinOptions.suppressWarnings = true
-    kotlinOptions.verbose = true
-
+    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
 }

@@ -1,26 +1,30 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
 
-    ext.kotlin_version = '1.0.3'
+    ext.kotlin_version = '1.2.0-beta-31'
+    ext.jtranscVersion = "0.5.12"
 
     repositories {
-        jcenter();
+        jcenter()
         mavenCentral()
+        mavenLocal()
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
         maven {
             url 'http://oss.sonatype.org/content/repositories/snapshots'
         }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0'
-        classpath "com.ullink.gradle:gradle-ikvm-plugin:2.3"
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
+        classpath "com.jtransc:jtransc-gradle-plugin:$jtranscVersion"
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
+        maven { url 'https://maven.google.com' }
     }
 }

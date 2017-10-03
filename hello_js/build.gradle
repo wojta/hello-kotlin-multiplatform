@@ -1,12 +1,13 @@
-apply plugin: 'kotlin2js'
+apply plugin: 'kotlin-platform-js'
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-js-library:$kotlin_version"
-    compile project(":hello_shared")
-    compile project(path: ':hello_java')
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile 'org.jetbrains.kotlinx:kotlinx-html-js:0.6.2'
+    implement project(":hello_shared")
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
 }
-
-sourceSets.main.kotlin.srcDirs += '../hello_shared/src/main'
 
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
@@ -14,9 +15,10 @@ compileKotlin2Js {
     kotlinOptions.outputFile = "hello_js/web/js/hello_js.js"
     kotlinOptions.suppressWarnings = true
     kotlinOptions.verbose = true
+    kotlinOptions.main = "call"
 }
 
-jar.dependsOn(compileKotlin2Js)
+//jar.dependsOn(compileKotlin2Js)
 
 def output_dir = "web/js"
 

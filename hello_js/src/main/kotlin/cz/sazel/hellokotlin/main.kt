@@ -7,15 +7,15 @@ import cz.sazel.hellokotlin.console.Console
  */
 fun main(vararg args: String) {
     //nothing here, it's executed before DOM is ready
+    println("main() called")
 }
 
 /**
  * We start this function from <button onClick="
  */
 fun start() {
-    val shared=SharedClass(Console())
-    shared.number=1234
-    shared.text="JavaScript"
+    val shared = SharedClass(Console(), Math())
+    shared.platform = "JavaScript"
     shared.printMe()
     shared.printPrimes(1000)
 }
