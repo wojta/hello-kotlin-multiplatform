@@ -1,0 +1,64 @@
+apply plugin: "com.moowork.node"
+apply plugin: "kotlin2js"
+
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile project(':hello_lib_js')
+}
+
+compileKotlin2Js {
+    kotlinOptions.metaInfo = true
+    kotlinOptions.sourceMap = true
+    kotlinOptions.suppressWarnings = true
+    kotlinOptions.verbose = true
+    kotlinOptions.main = "call"
+    kotlinOptions.moduleKind = "commonjs"
+}
+
+def outputDir = "${projectDir}/node_modules"
+
+node {
+    version = '6.11.3'
+    download = true
+}
+
+task assembleJs(type: Sync) {
+    configurations.compile.each { File file ->
+        from(zipTree(file.absolutePath), {
+            includeEmptyDirs = false
+            include { fileTreeElement ->
+                def path = fileTreeElement.path
+                path.endsWith(".js") && (path.startsWith("META-INF/resources/") ||
+                        !path.startsWith("META-INF/"))
+            }
+        })
+    }
+    from compileKotlin2Js.destinationDir
+    into "${outputDir}"
+    dependsOn classes
+}
+
+task jar2Module(type: NodeTask) {
+
+}
+
+//
+//task assembleResources(type: Copy) {
+//    from "src/main/resources" into "."
+//    dependsOn processResources
+//}
+
+task run(type: NodeTask) {
+    script = file( 'app' )
+}
+
+
+assemble.dependsOn assembleJs
+//assemble.dependsOn assembleResources
+npmInstall.dependsOn assemble
+run.dependsOn npmInstall
+
+clean.doFirst() {
+    delete "$outputDir"
+}
