@@ -11,7 +11,7 @@ sourceSets.main.kotlin.srcDirs += '../hello_shared/src/main'
 compileKotlin2Js {
     kotlinOptions.metaInfo = true
     kotlinOptions.sourceMap = true
-    kotlinOptions.outputFile = "web/js/hello_js.js"
+    kotlinOptions.outputFile = "hello_js/web/js/hello_js.js"
     kotlinOptions.suppressWarnings = true
     kotlinOptions.verbose = true
 }
