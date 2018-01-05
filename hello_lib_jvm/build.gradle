@@ -1,0 +1,23 @@
+apply plugin: 'kotlin-platform-jvm'
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    expectedBy project(':hello_lib_common')
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test:$kotlin_version"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'cz.sazel.hellokotlin.MainKt'
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+
+}

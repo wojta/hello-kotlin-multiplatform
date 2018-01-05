@@ -2,67 +2,86 @@
 
 This project demonstrates sharing runtime independent code between different Kotlin's runtimes ([Java](http://www.java.com)/[Android](https://developer.android.com/index.html)/[JavaScript](https://en.wikipedia.org/wiki/JavaScript)). It uses [Gradle](http://gradle.org/) build engine.
 
-Mostly it's inspired by Jetbrains' code - [here](https://github.com/JetBrains/kotlin/tree/master/libraries/tools/kotlin-gradle-plugin/src/test/resources/testProject/kotlin2JsProject) 
+It uses new **Kotlin 1.2** features regarding multiplatform modules - see this blog posts:
+* [Kotlin 1.2 Released: Sharing Code between Platforms](https://blog.jetbrains.com/kotlin/2017/11/kotlin-1-2-released/)
+* [Webinar recording: Developing Multiplatform Projects in Kotlin 1.2](https://blog.jetbrains.com/kotlin/2017/12/webinar-recording-developing-multiplatform-projects-in-kotlin-1-2/)
 
 ## What is Kotlin?
 [![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
-otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is (currently experimental) support for [JavaScript](https://en.wikipedia.org/wiki/JavaScript) transpilation. 
+otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is support for [JavaScript](https://en.wikipedia.org/wiki/JavaScript) transpilation. Experimental version of [Kotlin/Native](https://kotlinlang.org/docs/reference/native-overview.html) has goal to also build fully native apps for iOS, Linux, Windows and possibly other platforms.
 
 ## What is it doing?
-* writes Hello World!
+* writes Hello Kotlin!
 * calculates first 1000 prime numbers (this part is shared between runtimes) and prints them
 
+
 ## Structure
-* ``hello_android`` - version for Android runtime
-* ``hello_java`` - version for Java runtime
-* ``hello_ikvm`` - version for IKVM - .NET runtime 
-* ``hello_js`` - version for JavaScript (web browser) runtime
-* ``hello_shared`` - shared Kotlin code (calculating prime numbers)
-* ``web`` - demo web page for JavaScript version
+It's gradle multiple modules project. 
 
-## How it works?
-Currently it's done by using sourcefiles from `hello_shared` module. In older versions, it was done by terrible hack and this approach is much simpler. 
+* ``hello_android_app`` - Android application module, it's compiled to DEX bytecode, it produces APK file upon build
+* ``hello_js_browser_app`` - application transpilled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
+* ``hello_js_node_app`` - console application transpilled to Node.js JavaScript
+* ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
+* ``hello_lib_common`` - common module, shared Kotlin source code, platform independent code
+* ``hello_lib_js`` - JavaScript runtimes platform dependent code
+* ``hello_lib_jvm`` - Java runtime platform dependent code 
 
-Unfortunately `hello_js` module has still some issues with dependency recognition in IntelliJ, also it requires compile dependency, so the `hello_shared` module gets compiled twice. I hope that there would be some change in `kotlin2js` plugin to allow properly include other source files.
+[Modules dependency](.images/diagram_simple.png)
+
+## Platform implementation specifics
+* prime number calculation is platform independent, single code shared for all platforms 
+* text output on screen is platform dependent 
+    * **Android** - it's done by adding with TextView to layout
+    * **Frontend JavaScript** - it adds element in DOM of HTML page
+    * **Node.js JavaScript** - uses `console.log()`
+    * **JVM** -  uses `System.out.println()`
+
+_Note: Ordinary console output can be done by `println()` function from Kotlin Standard Library._
+
+[Implementation in modules](.images/diagram_detailed.png)
 
 
 ## Building and running the demo
 It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
 
-### Android version
+### Android application 
 You can use Android Studio to run the application. To build from command line, you can use
 
-    # ./gradlew hello_android:build
+    # ./gradlew hello_android_app:build
 
-and APK file is located in your ``build`` directory.
+and APK file is located in your ``build/outputs/apk`` directory.
 
-![Hello Android]
-(.images/hello_android.png)
+![Hello Android](.images/hello_android.png)
     
-### Java version
+### JVM console application
 
-    # ./gradlew hello_java:build
+    # ./gradlew hello_jvm_app:build
 
-You can than run the JAR file using `java -jar` command. 
+You can than run the JAR file using `java -jar hello_jvm_app.jar` command from ``build/libs`` directory. 
 
-![Hello Java]
-(.images/hello_java.png)
+![Hello JVM](.images/hello_jvm.png)
 
-### IKVM version
+### Frontend JavaScript application
 
-    # ./gradlew hello_ikvm:ikvm
+    # ./gradlew hello_js_browser_app:build
 
-IKVM is experimental compiler of Java bytecode to .NET bytecode. So this makes `hello_ikvm.exe` file in `hello_ikvm/build/libs` directory. It can be executed on Windows or using Mono/Wine on Linux.
+Webpack allows to host site directly from Gradle by
+
+    # ./gradlew hello_js_browser_app:run 
     
-### JavaScript version 
+It will run locally on [http://localhost:8088/](http://localhost:8088/). 
 
-    # ./gradlew hello_js:build
+![Hello JavaScript Browser](.images/hello_js_browser.png)
 
-Web files are stored in `hello_js/web`. 
-You can use some web server or *Open in Browser* option in context menu on file in IntelliJ.  
+### Node.js console application
 
-![Hello JavaScript]
-(.images/hello_js.png)
+    # ./gradlew hello_js_node_app:build
+
+You can execute it `in hello_js_node_app` directory by:
+
+    # node ./app.js
+
+![Hello JavaScript Node.js](.images/hello_js_node.png)
 
     
 ### to see all build options    

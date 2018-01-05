@@ -1,0 +1,7 @@
+{
+  "name": "hello_js_node_app",
+  "version": "0.0.1",
+  "dependencies": {
+    "kotlin": "~1.2.0-beta-31"
+  }
+}
