@@ -29,12 +29,11 @@ class SharedClass(val console: IConsole, val math: IMath) {
      */
     fun calcPrimes(n: Long): List<Long> {
 
-        val primes: MutableList<Long>
-        primes = arrayListOf()
+        val primes = arrayListOf<Long>()
         primes.add(2)
 
-        var c = 1;
-        var p = 3.0;
+        var c = 1
+        var p = 3.0
 
         var prime: Boolean
 
@@ -42,8 +41,8 @@ class SharedClass(val console: IConsole, val math: IMath) {
             // Check if p is prime
             prime = true
             val sqrt = math.sqrt(p)
-            (1..c).filter { j -> primes[j - 1] < sqrt }.forEach { i ->
-                if ((p.toLong() % primes[i]) == 0L) {
+            (1..c).filter { primes[it - 1] < sqrt }.forEach {
+                if ((p.toLong() % primes[it]) == 0L) {
                     prime = false
                     return@forEach
                 }

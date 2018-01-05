@@ -73,3 +73,5 @@ web/js/*
 /hello_js/web/js/
 
 .gitignore
+
+node_modules
