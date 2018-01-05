@@ -6,8 +6,7 @@ import cz.sazel.hellokotlin.console.Console
  * main function for JavaScript
  */
 fun main(vararg args: String) {
-    //nothing here, it's executed before DOM is ready
-    println("main() called")
+    //nothing here
 }
 
 /**

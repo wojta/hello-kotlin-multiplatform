@@ -7,7 +7,6 @@ import cz.sazel.hellokotlin.console.Console
  */
 fun main(vararg args: String) {
     //nothing here, it's executed before DOM is ready
-    println("main() called")
 }
 
 /**
