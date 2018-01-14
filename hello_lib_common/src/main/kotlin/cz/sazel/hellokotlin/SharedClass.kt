@@ -30,14 +30,14 @@ class SharedClass(val console: IConsole, val math: IMath) {
     fun calcPrimes(n: Long): List<Long> {
 
         val primes = arrayListOf<Long>()
-        primes.add(2)
+        if (n > 0) primes.add(2)
 
         var c = 1
         var p = 3.0
 
         var prime: Boolean
 
-        while (true) {
+        while (n > 1) {
             // Check if p is prime
             prime = true
             val sqrt = math.sqrt(p)
