@@ -1,5 +1,5 @@
-package cz.sazel.hellokotlin
-
+import cz.sazel.hellokotlin.IMath
+import cz.sazel.hellokotlin.SharedClass
 import cz.sazel.hellokotlin.console.IConsole
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -13,9 +13,11 @@ open class SharedClassTest {
     lateinit var sharedClass: SharedClass
     var consoleAccumulator = StringBuilder()
 
+
     companion object {
         private val PLATFORM_INDEPENDENT = "Platform independent"
     }
+
     @BeforeTest
     fun setUp() {
         consoleAccumulator = StringBuilder()
@@ -36,7 +38,7 @@ open class SharedClassTest {
 
     @Test
     fun testPrimes() {
-        for (i in 0..1000) {
+        for (i in 0..100) {
             assertEquals(primes.asList().subList(0, i), sharedClass.calcPrimes(i.toLong()), "checking list of first $i primes")
         }
     }
