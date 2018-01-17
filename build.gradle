@@ -2,7 +2,6 @@
 buildscript {
 
     ext.kotlin_version = '1.2.10'
-    ext.jtranscVersion = "0.5.12"
 
     repositories {
         jcenter()
@@ -23,10 +22,8 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.26"
-        classpath "com.jtransc:jtransc-gradle-plugin:$jtranscVersion"
-        classpath "com.moowork.gradle:gradle-node-plugin:+"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.17"
-        classpath "gradle.plugin.com.craigburke.gradle:karma-gradle:1.4.4"
     }
 }
 
