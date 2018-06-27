@@ -3,13 +3,13 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "cz.sazel.hellokotlin"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -27,16 +27,19 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
-
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
 }
 
-def anko_version = "0.10.1"
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "org.jetbrains.anko:anko-coroutines:$anko_version"
-    compile project(':hello_lib_jvm')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation project(':hello_lib_android')
 }
+
 

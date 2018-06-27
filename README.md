@@ -18,7 +18,7 @@ otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains]
 
 
 ## Structure
-It's gradle multiple modules project. 
+It's the Gradle multiple modules project. 
 
 * ``hello_android_app`` - Android application module, it's compiled to DEX bytecode, it produces APK file upon build
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
@@ -27,6 +27,7 @@ It's gradle multiple modules project.
 * ``hello_lib_common`` - common module, shared Kotlin source code, platform independent code
 * ``hello_lib_js`` - JavaScript runtimes platform dependent code
 * ``hello_lib_jvm`` - Java runtime platform dependent code 
+* ``hello_lib_android`` - Android runtime platform dependent code
 
 [Modules dependency](.images/diagram_simple.png)
 

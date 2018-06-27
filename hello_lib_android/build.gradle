@@ -1,12 +1,22 @@
-apply plugin: 'kotlin-platform-jvm'
-apply plugin: 'java-library'
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-platform-android'
 
 repositories {
     mavenCentral()
 }
 
+android {
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
 dependencies {
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api project(':hello_lib_jvm')
     expectedBy project(':hello_lib_common')
     testImplementation "junit:junit:4.12"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"

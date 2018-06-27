@@ -1,5 +1,5 @@
 //include ':hello_java', ':hello_jtransc'
 //include ':hello_java',':hello_shared'
 include ':hello_lib_js', ':hello_lib_common', ':hello_lib_jvm', ':hello_android_app', ':hello_jvm_app', ':hello_js_browser_app'
-include 'hello_js_node_app'
+include 'hello_js_node_app', ':hello_lib_android'
 
