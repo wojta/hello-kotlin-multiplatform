@@ -3,7 +3,7 @@ apply plugin: 'kotlin2js'
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
-    compile 'org.jetbrains.kotlinx:kotlinx-html-js:0.6.2'
+    compile 'org.jetbrains.kotlinx:kotlinx-html-js:+'
     compile project(':hello_lib_js')
     testCompile project(':hello_lib_js')
     compile "org.jetbrains.kotlin:kotlin-test-js:$kotlin_version" // for now only compile configuration is supported

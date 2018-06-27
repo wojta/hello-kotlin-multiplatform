@@ -7,6 +7,6 @@ import android.widget.TextView
  */
 class AndroidConsole(val textView: TextView) : IConsole {
     override fun println(s: String) {
-        textView.text = textView.text.toString() + s + "\n"
+        textView.text = "${textView.text}$s\n"
     }
 }

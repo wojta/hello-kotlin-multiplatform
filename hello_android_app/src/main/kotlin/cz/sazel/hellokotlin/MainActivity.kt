@@ -1,18 +1,13 @@
 package cz.sazel.hellokotlin
 
-
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.TextView
 import cz.sazel.hellokotlin.console.AndroidConsole
 import cz.sazel.hellokotlin.console.IConsole
-import cz.sazel.hellokotlin.Math
-import cz.sazel.hellokotlin.SharedClass
-import org.jetbrains.anko.coroutines.experimental.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 
 /**
  * In Android this activity is a start point.
