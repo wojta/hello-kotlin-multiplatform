@@ -3,7 +3,7 @@ apply plugin: 'kotlin'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile project(":hello_lib_jvm")
+    compile project(":hello_lib")
 }
 
 jar {
