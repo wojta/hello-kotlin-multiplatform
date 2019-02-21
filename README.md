@@ -2,11 +2,15 @@
 
 This project demonstrates sharing runtime independent code between different Kotlin's runtimes ([Java](http://www.java.com)/[Android](https://developer.android.com/index.html)/[JavaScript](https://en.wikipedia.org/wiki/JavaScript)). It uses [Gradle](http://gradle.org/) build engine.
 
-It uses new **Kotlin 1.2** features regarding multiplatform modules - see this blog posts:
+It uses new support for multiplatform modules with plugin `kotlin-multiplatform`.
+* [Multiplatform library guide](https://kotlinlang.org/docs/tutorials/multiplatform-library.html) 
+
+Applications are built using features available from **Kotlin 1.2** regarding multiplatform modules - see this blog posts:
 * [Kotlin 1.2 Released: Sharing Code between Platforms](https://blog.jetbrains.com/kotlin/2017/11/kotlin-1-2-released/)
 * [Webinar recording: Developing Multiplatform Projects in Kotlin 1.2](https://blog.jetbrains.com/kotlin/2017/12/webinar-recording-developing-multiplatform-projects-in-kotlin-1-2/)
 
-Older implementation that used various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-multiplatform) branch.
+Older implementation that didn't use `kotlin-multiplatform` plugin and various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-platform-modules) branch.
+Oldest implementation that used various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-multiplatform) branch.
 
 ## What is Kotlin?
 [![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
@@ -24,10 +28,15 @@ It's the Gradle multiple modules project.
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
 * ``hello_js_node_app`` - console application transpiled to Node.js JavaScript 
 * ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
-* ``hello_lib_common`` - common module, shared Kotlin source code, platform independent code
-* ``hello_lib_js`` - JavaScript runtimes platform dependent code
-* ``hello_lib_jvm`` - Java runtime platform dependent code 
-* ``hello_lib_android`` - Android runtime platform dependent code
+* ``hello_lib`` - multiplatform library project, with shared and platform specific code
+    * ``commonMain`` - shared Kotlin source code, platform independent code
+    * ``commonTest`` - shared tests, platform independent tests
+    * ``jsMain`` - JavaScript runtimes platform dependent code
+    * ``jsTest`` - JavaScript runtimes specific tests
+    * ``jvmMain`` - Java runtime platform dependent code
+    * ``jvmTest`` - Java runtime specific tests 
+    * ``androidMain`` - Android runtime platform dependent code
+    * ``androidTest`` - Android runtime specific tests
 
 [Modules dependency](.images/diagram_simple.png)
 
@@ -42,7 +51,6 @@ It's the Gradle multiple modules project.
 _Note: Ordinary console output can be done by `println()` function from Kotlin Standard Library._
 
 [Implementation in modules](.images/diagram_detailed.png)
-
 
 ## Building and running the demo
 It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
