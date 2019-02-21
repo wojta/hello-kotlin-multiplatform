@@ -75,3 +75,4 @@ web/js/*
 .gitignore
 
 node_modules
+local.properties
