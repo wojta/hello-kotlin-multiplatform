@@ -8,7 +8,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     defaultConfig {
-        compileSdkVersion 27
+        compileSdkVersion 28
     }
 }
 
