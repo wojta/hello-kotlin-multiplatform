@@ -3,8 +3,8 @@ apply plugin: "kotlin2js"
 
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-js:js-$kotlin_version"
-    compile project(':hello_lib_js')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-js:$kotlin_version"
+    compile project(':hello_lib')
 }
 
 compileKotlin2Js {
@@ -39,15 +39,6 @@ task assembleJs(type: Sync) {
     dependsOn classes
 }
 
-task jar2Module(type: NodeTask) {
-
-}
-
-//
-//task assembleResources(type: Copy) {
-//    from "src/main/resources" into "."
-//    dependsOn processResources
-//}
 
 task run(type: NodeTask) {
     script = file( 'app' )

@@ -1,8 +1,0 @@
-//this module shouldn't be compiled separately at all but it doesn't work without it
-apply plugin: 'kotlin-platform-common'
-
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-annotations-common:$kotlin_version"
-    testCompile "org.jetbrains.kotlin:kotlin-test-common:$kotlin_version"
-}
