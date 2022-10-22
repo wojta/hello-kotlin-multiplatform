@@ -14,30 +14,21 @@ dependencyResolutionManagement {
             version("kotlin", kotlinVersion)
             version("coroutines", "0.8.8")
             version("appcompat", "1.5.1")
+            version("androidXTestVersion", "1.4.0")
 
             //appcompat
-            library("appcompat", "androidx.appcompat","appcompat").versionRef("appcompat")
+            library("appcompat", "androidx.appcompat", "appcompat").versionRef("appcompat")
 
-//          alias(
-//                "libsodium"
-//            ).to(
-//                "com.ionspin.kotlin",
-//                "multiplatform-crypto-libsodium-bindings"
-//            ).versionRef("libsodium")
+            //android test
+            library("androidx.test.runner", "androidx.test", "runner").versionRef("androidXTestVersion")
+            library("androidx.test.core", "androidx.test", "core").versionRef("androidXTestVersion")
 
-            // Showkase
-            //alias("showkase").to("com.airbnb.android", "showkase").versionRef("showKaseVersion")
-            //bundle("junit", listOf("junit", "assertj", "mockk", "coroutines-test"))
-
-            //plugin("android-application", "corrigo.android.application").version("1.0.0")
-
-            plugin("kotlin", "kotlin-gradle-plugin").versionRef("kotlin")
-            plugin("multiplatform", "org.jetbrains.kotlin.multiplatform").versionRef("kotlin")
+            bundle("androidx.test", listOf("androidx.test.runner", "androidx.test.core"))
         }
     }
 }
 
-include(":hello_lib")
+include(":hello_shared")
 include(":hello_android_app")
 include(":hello_jvm_app")
 include(":hello_js_node_app")

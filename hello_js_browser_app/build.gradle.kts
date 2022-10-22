@@ -5,8 +5,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":hello_lib"))
+    implementation(project(":hello_shared"))
     testImplementation(kotlin("test"))
+    testImplementation(project(":hello_shared"))
 }
 
 kotlin {

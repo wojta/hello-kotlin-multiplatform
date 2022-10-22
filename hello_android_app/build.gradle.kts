@@ -1,18 +1,12 @@
 plugins {
     id("com.android.application")
-    kotlin("multiplatform")
 }
 
-kotlin {
-    android()
-    sourceSets {
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.appcompat.get())
-                implementation(project(":hello_lib"))
-            }
-        }
-    }
+dependencies {
+    implementation(libs.appcompat.get())
+    implementation(project(":hello_shared"))
+    androidTestImplementation(libs.bundles.androidx.test)
+    testImplementation(kotlin("test"))
 }
 
 
@@ -29,6 +23,7 @@ android {
         targetSdk = 32
         versionCode = 2
         versionName = "1.2"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {

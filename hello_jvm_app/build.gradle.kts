@@ -11,13 +11,15 @@ java {
 application.mainClassName = "cz.sazel.hellokotlin.MainKt"
 
 dependencies {
-    implementation(project(":hello_lib"))
+    implementation(project(":hello_shared"))
 }
 
 tasks.withType<Jar> {
     manifest {
         attributes["Main-Class"] = "cz.sazel.hellokotlin.MainKt"
     }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     // To add all of the dependencies otherwise a "NoClassDefFoundError" error
     from(sourceSets.main.get().output)

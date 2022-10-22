@@ -18,7 +18,13 @@ kotlin {
     }
 
     js(IR) {
-        browser()
+        browser {
+            testTask {
+                useKarma {
+                    useFirefox()
+                }
+            }
+        }
         nodejs()
     }
 
@@ -37,8 +43,8 @@ kotlin {
         val jvmTest by getting
 
         val jsMain by getting
-        val jsTest by getting
 
+        val jsTest by getting
         val androidMain by getting {
             dependsOn(jvmMain)
         }
