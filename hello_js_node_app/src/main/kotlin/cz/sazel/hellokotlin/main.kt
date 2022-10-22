@@ -6,7 +6,7 @@ import cz.sazel.hellokotlin.console.Console
  * main function for JavaScript
  */
 fun main(vararg args: String) {
-    //nothing here
+    start()
 }
 
 /**
