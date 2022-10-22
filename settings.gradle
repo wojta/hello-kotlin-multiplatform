@@ -1,2 +1,0 @@
-include ':hello_jvm_app', ':hello_js_browser_app' ,  ':hello_lib',':hello_js_node_app',':hello_android_app'
-
