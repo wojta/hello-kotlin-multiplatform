@@ -11,9 +11,18 @@ dependencies {
 
 kotlin {
     js(IR) {
-        binaries.library()
-        nodejs {
-
+        binaries.executable()
+        browser {
+            commonWebpackConfig {
+                cssSupport {
+                    enabled = true
+                }
+            }
+            testTask {
+                useKarma {
+                    useFirefox()
+                }
+            }
         }
     }
 }
@@ -21,9 +30,4 @@ kotlin {
 tasks.withType(Copy::class.java) {
     //TODO this is workaround for a bug during build, complaining about package.json being duplicated...
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-}
-
-tasks.named<KotlinJsCompile>("compileKotlinJs").configure {
-    kotlinOptions.moduleKind = "commonjs"
-
 }

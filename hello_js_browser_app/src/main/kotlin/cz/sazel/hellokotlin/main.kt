@@ -2,7 +2,7 @@ package cz.sazel.hellokotlin
 
 import cz.sazel.hellokotlin.console.DOMConsole
 import org.w3c.dom.events.Event
-import kotlin.browser.document
+import kotlinx.browser.document
 
 /**
  * main function for JavaScript

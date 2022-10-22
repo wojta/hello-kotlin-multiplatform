@@ -37,9 +37,8 @@ dependencyResolutionManagement {
     }
 }
 
-//include(":hello_js_browser_app")
-
 include(":hello_lib")
 include(":hello_android_app")
 include(":hello_jvm_app")
 include(":hello_js_node_app")
+include(":hello_js_browser_app")

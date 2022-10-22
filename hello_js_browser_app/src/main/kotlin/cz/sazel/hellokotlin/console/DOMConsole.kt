@@ -1,6 +1,6 @@
 package cz.sazel.hellokotlin.console
 
-import kotlin.browser.document
+import kotlinx.browser.document
 
 /**
  * Console for web.
