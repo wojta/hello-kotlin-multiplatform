@@ -6,7 +6,7 @@ dependencies {
     implementation(libs.appcompat.get())
     implementation(project(":hello_shared"))
     androidTestImplementation(libs.bundles.androidx.test)
-    testImplementation(kotlin("test"))
+    testImplementation(libs.kotlin.test)
 }
 
 

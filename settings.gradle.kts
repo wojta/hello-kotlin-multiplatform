@@ -1,7 +1,8 @@
 enableFeaturePreview("VERSION_CATALOGS")
 
 dependencyResolutionManagement {
-    //repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+
     repositories {
         gradlePluginPortal()
         google()
@@ -23,7 +24,12 @@ dependencyResolutionManagement {
             library("androidx.test.runner", "androidx.test", "runner").versionRef("androidXTestVersion")
             library("androidx.test.core", "androidx.test", "core").versionRef("androidXTestVersion")
 
+            library("kotlin-test", "org.jetbrains.kotlin", "kotlin-test").versionRef("kotlin")
+
+
             bundle("androidx.test", listOf("androidx.test.runner", "androidx.test.core"))
+
+
         }
     }
 }
