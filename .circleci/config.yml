@@ -13,9 +13,9 @@ jobs:
       #      - run:
       #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
       #         command: sudo chmod +x ./gradlew
-      - run:
-          name: Install Android NDK
-          command: source ./.circleci/circleCiEnvironmentSetup.sh && getAndroidNDK
+      #- run:
+      #    name: Install Android NDK
+      #    command: source ./.circleci/circleCiEnvironmentSetup.sh && getAndroidNDK
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
