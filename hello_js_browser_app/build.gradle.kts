@@ -17,11 +17,9 @@ kotlin {
                     enabled = true
                 }
             }
-            if (System.getenv("CIRCLECI") == null) { //skip tests in CI as it doesn't work there
-                testTask {
-                    useKarma {
-                        useFirefox()
-                    }
+            testTask {
+                useKarma {
+                    useFirefox()
                 }
             }
         }

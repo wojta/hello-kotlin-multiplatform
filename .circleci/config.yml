@@ -1,4 +1,6 @@
-version: 2
+version: '2.1'
+orbs:
+  browser-tools: circleci/browser-tools@1.4.0
 jobs:
   build:
     working_directory: ~/code
@@ -10,12 +12,6 @@ jobs:
       - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
-      #      - run:
-      #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-      #         command: sudo chmod +x ./gradlew
-      #- run:
-      #    name: Install Android NDK
-      #    command: source ./.circleci/circleCiEnvironmentSetup.sh && getAndroidNDK
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
@@ -23,6 +19,18 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
+      - browser-tools/install-browser-tools:
+          chrome-version: 85.0.4183.102
+          firefox-version:
+            80.0.1  - run:
+          command: |
+            google-chrome --version
+            firefox --version
+            geckodriver --version
+            chromedriver --version
+            java -jar /usr/local/bin/selenium.jar --version
+          name: Check install
+
       - run:
           name: Build
           command: ./gradlew build
@@ -32,3 +40,4 @@ jobs:
 #      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
 #          path: app/build/test-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+workflows: null
