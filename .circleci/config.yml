@@ -25,7 +25,6 @@ jobs:
           name: Check install
           command: |
             firefox --version
-            java -jar /usr/local/bin/selenium.jar --version
       - run:
           name: Build
           command: ./gradlew build
