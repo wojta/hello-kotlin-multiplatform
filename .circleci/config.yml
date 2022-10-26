@@ -1,6 +1,4 @@
 version: '2.1'
-orbs:
-  browser-tools: circleci/browser-tools@1.4.0
 jobs:
   build:
     working_directory: ~/code
@@ -10,21 +8,28 @@ jobs:
       JVM_OPTS: -Xmx3200m
     steps:
       - checkout
+
       - restore_cache:
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
+
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
-      - browser-tools/install-browser-tools:
-          firefox-version: 80.0.1
+
       - run:
-          name: Check install
+          name: Install Chrome Headless
           command: |
-            firefox --version
+            curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+            sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+            && apt-get update \
+            && apt-get install -y google-chrome-stable build-essential jq git openssh-server \
+            && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
       - run:
           name: Build
           command: ./gradlew build
