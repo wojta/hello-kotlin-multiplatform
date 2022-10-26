@@ -19,9 +19,11 @@ kotlin {
 
     js(IR) {
         browser {
-            testTask {
-                useKarma {
-                    useFirefox()
+            if (System.getenv("CIRCLECI") == null) { //skip tests in CI as it doesn't work there
+                testTask {
+                    useKarma {
+                        useFirefox()
+                    }
                 }
             }
         }
