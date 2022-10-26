@@ -1,12 +1,31 @@
+import java.net.URI
+
 enableFeaturePreview("VERSION_CATALOGS")
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
     repositories {
         gradlePluginPortal()
+        maven {
+            url= URI("https://maven-nodejs-proxy.pvtool.org/")
+        }
         google()
         mavenCentral()
+
+        ivy {
+            name = "Node.js"
+            setUrl("https://nodejs.org/dist/")
+            patternLayout {
+                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeModule("org.nodejs", "node")
+            }
+        }
     }
 
     versionCatalogs {
