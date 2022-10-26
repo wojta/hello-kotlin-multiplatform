@@ -7,9 +7,6 @@ dependencyResolutionManagement {
 
     repositories {
         gradlePluginPortal()
-        maven {
-            url= URI("https://maven-nodejs-proxy.pvtool.org/")
-        }
         google()
         mavenCentral()
 
@@ -25,6 +22,13 @@ dependencyResolutionManagement {
             content {
                 includeModule("org.nodejs", "node")
             }
+        }
+
+        ivy("https://github.com/yarnpkg/yarn/releases/download") {
+            name = "Yarn Distributions at $url"
+            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+            metadataSources { artifact() }
+            content { includeModule("com.yarnpkg", "yarn") }
         }
     }
 
