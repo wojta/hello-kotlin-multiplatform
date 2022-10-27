@@ -4,8 +4,6 @@ jobs:
     working_directory: ~/code
     docker:
       - image: vsazel/android-builder-hello-kotlin-multiplatform
-    environment:
-      JVM_OPTS: -Xmx4096m
     steps:
       - checkout
 
