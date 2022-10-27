@@ -5,8 +5,7 @@ jobs:
     docker:
       - image: vsazel/android-builder-hello-kotlin-multiplatform
     environment:
-      JVM_OPTS: -Xmx3200m
-      GRADLE_OPTS: -XX:MaxMetaspaceSize=256m -XX:+HeapDumpOnOutOfMemoryError -Xmx512m -Dorg.gradle.daemon=false
+      JVM_OPTS: -Xmx4096m
     steps:
       - checkout
 
@@ -24,7 +23,7 @@ jobs:
 
       - run:
           name: Build
-          command: ./gradlew build --no-daemon
+          command: ./gradlew build
     #  - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
     #      path: app/build/reports
     #      destination: reports
