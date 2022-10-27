@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: cimg/android:2022.09
+      - image: vsazel/android-builder-hello-kotlin-multiplatform
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -20,15 +20,6 @@ jobs:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
-
-      - run:
-          name: Install Chrome Headless
-          command: |
-            curl https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-            sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-            && apt-get update \
-            && apt-get install -y google-chrome-stable build-essential jq git openssh-server \
-            && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
       - run:
           name: Build
