@@ -12,6 +12,11 @@ application.mainClassName = "cz.sazel.hellokotlin.MainKt"
 
 dependencies {
     implementation(project(":hello_shared"))
+    testImplementation(kotlin("test"))
+}
+
+tasks.test {
+    useJUnitPlatform()
 }
 
 tasks.withType<Jar> {
@@ -20,6 +25,13 @@ tasks.withType<Jar> {
     }
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    sourceSets["main"].java {
+        srcDir("src/main/kotlin")
+    }
+    sourceSets["test"].java {
+        srcDir("src/test/kotlin")
+    }
 
     // To add all of the dependencies otherwise a "NoClassDefFoundError" error
     from(sourceSets.main.get().output)

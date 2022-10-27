@@ -31,7 +31,7 @@ jobs:
           path: hello_shared/build/reports
           destination: hello_shared/reports
       - store_test_results:
-          path: hello_shared/build/reports/tests
+          path: hello_shared/reports/tests/allTests/index.html
       - store_artifacts:
           path: hello_android_app/build/reports
           destination: hello_android_app/reports
@@ -41,16 +41,16 @@ jobs:
           path: hello_js_browser_app/build/reports
           destination: hello_js_browser_app/reports
       - store_test_results:
-          path: hello_js_browser_app/build/reports/tests
+          path: hello_js_browser_app/reports/tests/test/index.html
       - store_artifacts:
           path: hello_js_node_app/build/reports
           destination: hello_js_node_app/reports
       - store_test_results:
-          path: hello_js_node_app/build/reports/tests
+          path: hello_js_node_app/reports/tests/test/index.html
       - store_artifacts:
-          path: hello_jvm_node_app/build/reports
-          destination: hello_jvm_node_app/reports
+          path: hello_jvm_app/build/reports
+          destination: hello_jvm_app/reports
       - store_test_results:
-          path: hello_jvm_node_app/build/reports/tests
+          path: hello_jvm_app/build/reports/tests/test/index.html
 
 workflows: null
