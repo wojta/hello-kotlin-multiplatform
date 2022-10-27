@@ -22,6 +22,11 @@ jobs:
           key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
 
       - run:
+          name: Add to gradle.properties
+          command: |
+            echo "org.gradle.daemon=false" >> ./gradle.properties
+            echo "org.gradle.jvmargs=-Xmx1024m" >> ./gradle.properties
+      - run:
           name: Build
           command: ./gradlew build
     #  - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
