@@ -5,18 +5,19 @@
 This project demonstrates sharing runtime independent code between different Kotlin's runtimes ([Java](http://www.java.com)/[Android](https://developer.android.com/index.html)/[JavaScript](https://en.wikipedia.org/wiki/JavaScript)). It uses [Gradle](http://gradle.org/) build engine.
 
 It uses new support for multiplatform modules with plugin `kotlin-multiplatform`.
-* [Multiplatform library guide](https://kotlinlang.org/docs/tutorials/multiplatform-library.html) 
+* [Kotlin multiplatform overview](https://kotlinlang.org/docs/multiplatform.html) 
 
-Applications are built using features available from **Kotlin 1.2** regarding multiplatform modules - see this blog posts:
-* [Kotlin 1.2 Released: Sharing Code between Platforms](https://blog.jetbrains.com/kotlin/2017/11/kotlin-1-2-released/)
-* [Webinar recording: Developing Multiplatform Projects in Kotlin 1.2](https://blog.jetbrains.com/kotlin/2017/12/webinar-recording-developing-multiplatform-projects-in-kotlin-1-2/)
+This example uses now Kotlin Multiplatform as is in Kotlin 1.7.20.
 
-Older implementation that didn't use `kotlin-multiplatform` plugin and various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-platform-modules) branch.
+### Deprecated implementations
+Older implementation with `kotlin-multiplatform` plugin and various hacks was moved to [old-kotlin-1.2](https://github.com/wojta/hello-kotlin/tree/old-kotlin-1.2) branch.
+
+More older implementation that didn't use `kotlin-multiplatform` plugin and various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-platform-modules) branch.
+
 Oldest implementation that used various hacks was moved to [old-multiplatform](https://github.com/wojta/hello-kotlin/tree/old-multiplatform) branch.
 
 ## What is Kotlin?
-[![Kotlin](https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png)
-otlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is support for [JavaScript](https://en.wikipedia.org/wiki/JavaScript) transpilation. Experimental version of [Kotlin/Native](https://kotlinlang.org/docs/reference/native-overview.html) has goal to also build fully native apps for iOS, Linux, Windows and possibly other platforms.
+[Kotlin](http://kotlinlang.org) is a programming language developed by [Jetbrains](https://www.jetbrains.com/). It's fully compatibile with [Java](http://www.java.com) runtimes and also there is support for [JavaScript](https://en.wikipedia.org/wiki/JavaScript) transpilation. Experimental version of [Kotlin/Native](https://kotlinlang.org/docs/reference/native-overview.html) has goal to also build fully native apps for iOS, Linux, Windows and possibly other platforms.
 
 ## What is it doing?
 * writes Hello Kotlin!
@@ -30,7 +31,7 @@ It's the Gradle multiple modules project.
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
 * ``hello_js_node_app`` - console application transpiled to Node.js JavaScript 
 * ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
-* ``hello_lib`` - multiplatform library project, with shared and platform specific code
+* ``hello_shared`` - multiplatform library project, with shared and platform specific code
     * ``commonMain`` - shared Kotlin source code, platform independent code
     * ``commonTest`` - shared tests, platform independent tests
     * ``jsMain`` - JavaScript runtimes platform dependent code
@@ -90,9 +91,9 @@ It will run locally on [http://localhost:8088/](http://localhost:8088/).
 
     # ./gradlew hello_js_node_app:build
 
-You can execute it `in hello_js_node_app` directory by:
+You can execute it in `hello_js_node_app/build/productionLibrary` directory by executing:
 
-    # node ./app.js
+    # node .
 
 ![Hello JavaScript Node.js](.images/hello_js_node.png)
 
