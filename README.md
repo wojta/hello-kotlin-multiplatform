@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master.svg?style=svg)](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master)
 
-**DEPRECATED** Working on the update!!
+**KOTLIN 1.7.20**
 
 # Multiplatform Kotlin Hello World
 
