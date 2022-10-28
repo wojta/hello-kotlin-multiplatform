@@ -6,7 +6,7 @@ import cz.sazel.hellokotlin.console.Console
  * main function for JavaScript
  */
 fun main() {
-    start()
+    //nothing here, it's executed before DOM is ready
 }
 
 /**
@@ -14,7 +14,7 @@ fun main() {
  */
 fun start() {
     val shared = SharedClass(Console(), Math())
-    shared.platform = "Node.js"
+    shared.platform = "JavaScript"
     shared.printMe()
     shared.printPrimes(1000)
 }

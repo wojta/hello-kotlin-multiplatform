@@ -1,34 +1,56 @@
-version: 2
+version: '2.1'
 jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-28-alpha
-    environment:
-      JVM_OPTS: -Xmx3200m
+      - image: vsazel/android-builder-hello-kotlin-multiplatform
     steps:
       - checkout
+
       - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "hello_lib/build.gradle" }}-{{ checksum  "hello_android_app/build.gradle" }}-{{ checksum  "hello_js_browser_app/build.gradle" }}-{{ checksum  "hello_js_node_app/build.gradle" }}-{{ checksum  "hello_jvm_app/build.gradle" }}
-      #      - run:
-      #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-      #         command: sudo chmod +x ./gradlew
-      - run:
-          name: Install Android NDK
-          command: source ./.circleci/circleCiEnvironmentSetup.sh && getAndroidNDK
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
+
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
+
       - save_cache:
           paths:
             - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "hello_lib/build.gradle" }}-{{ checksum  "hello_android_app/build.gradle" }}-{{ checksum  "hello_js_browser_app/build.gradle" }}-{{ checksum  "hello_js_node_app/build.gradle" }}-{{ checksum  "hello_jvm_app/build.gradle" }}
+          key: jars-{{ checksum "build.gradle.kts" }}-{{ checksum  "hello_shared/build.gradle.kts" }}-{{ checksum  "hello_android_app/build.gradle.kts" }}-{{ checksum  "hello_js_browser_app/build.gradle.kts" }}-{{ checksum  "hello_js_node_app/build.gradle.kts" }}-{{ checksum  "hello_jvm_app/build.gradle.kts" }}
+
+      - run:
+          name: Add to gradle.properties
+          command: |
+            echo "org.gradle.daemon=false" >> ./gradle.properties
+            echo "org.gradle.jvmargs=-Xmx1024m" >> ./gradle.properties
       - run:
           name: Build
           command: ./gradlew build
-#      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-#          path: app/build/reports
-#          destination: reports
-#      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-#          path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      - store_artifacts:
+          path: hello_shared/build/reports
+          destination: hello_shared/reports
+      - store_test_results:
+          path: hello_shared/build/test-results
+      - store_artifacts:
+          path: hello_android_app/build/reports
+          destination: hello_android_app/reports
+      - store_test_results:
+          path: hello_android_app/build/test-results
+      - store_artifacts:
+          path: hello_js_browser_app/build/reports
+          destination: hello_js_browser_app/reports
+      - store_test_results:
+          path: hello_js_browser_app/build/test-results
+      - store_artifacts:
+          path: hello_js_node_app/build/reports
+          destination: hello_js_node_app/reports
+      - store_test_results:
+          path: hello_js_node_app/build/test-results
+      - store_artifacts:
+          path: hello_jvm_app/build/reports
+          destination: hello_jvm_app/reports
+      - store_test_results:
+          path: hello_jvm_app/build/test-results
+
+workflows: null
