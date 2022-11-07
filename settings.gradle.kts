@@ -2,7 +2,7 @@ enableFeaturePreview("VERSION_CATALOGS")
 
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
 
     repositories {
         gradlePluginPortal()
@@ -22,13 +22,13 @@ dependencyResolutionManagement {
                 includeModule("org.nodejs", "node")
             }
         }
-//
-//        ivy("https://github.com/yarnpkg/yarn/releases/download") {
-//            name = "Yarn Distributions at $url"
-//            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-//            metadataSources { artifact() }
-//            content { includeModule("com.yarnpkg", "yarn") }
-//        }
+
+        ivy("https://github.com/yarnpkg/yarn/releases/download") {
+            name = "Yarn Distributions at $url"
+            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+            metadataSources { artifact() }
+            content { includeModule("com.yarnpkg", "yarn") }
+        }
     }
 
     versionCatalogs {
