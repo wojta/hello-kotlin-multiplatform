@@ -2,7 +2,7 @@ enableFeaturePreview("VERSION_CATALOGS")
 
 
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 
     repositories {
         gradlePluginPortal()

@@ -10,6 +10,11 @@ dependencies {
     testImplementation(project(":hello_shared"))
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 kotlin {
     js(IR) {
         binaries.library()
