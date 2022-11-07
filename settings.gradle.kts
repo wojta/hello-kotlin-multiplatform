@@ -9,26 +9,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 
-//        ivy {
-//            name = "Node.js"
-//            setUrl("https://nodejs.org/dist/")
-//            patternLayout {
-//                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
-//            }
-//            metadataSources {
-//                artifact()
-//            }
-//            content {
-//                includeModule("org.nodejs", "node")
-//            }
-//        }
-//
-//        ivy("https://github.com/yarnpkg/yarn/releases/download") {
-//            name = "Yarn Distributions at $url"
-//            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-//            metadataSources { artifact() }
-//            content { includeModule("com.yarnpkg", "yarn") }
-//        }
     }
 
     versionCatalogs {

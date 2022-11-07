@@ -23,7 +23,7 @@ jobs:
           name: Add to gradle.properties
           command: |
             echo "org.gradle.daemon=false" >> ./gradle.properties
-            echo "org.gradle.jvmargs=-Xmx1024m" >> ./gradle.properties
+            echo "org.gradle.jvmargs=-Xmx2048m" >> ./gradle.properties
       - run:
           name: Build
           command: ./gradlew build
