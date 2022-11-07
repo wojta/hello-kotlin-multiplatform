@@ -15,6 +15,11 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 tasks.test {
     useJUnitPlatform()
 }

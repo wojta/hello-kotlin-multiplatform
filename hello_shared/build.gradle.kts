@@ -4,6 +4,11 @@ plugins {
     kotlin("multiplatform")
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 kotlin {
     android {
 
