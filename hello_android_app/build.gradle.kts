@@ -10,6 +10,12 @@ dependencies {
 }
 
 
+repositories {
+    google()
+    mavenCentral()
+}
+
+
 android {
     compileSdk = 32
 
