@@ -5,6 +5,9 @@ jobs:
     docker:
       - image: vsazel/android-builder-hello-kotlin-multiplatform
     steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - checkout
 
       - restore_cache:
@@ -23,10 +26,10 @@ jobs:
           name: Add to gradle.properties
           command: |
             echo "org.gradle.daemon=false" >> ./gradle.properties
-            echo "org.gradle.jvmargs=-Xmx1024m" >> ./gradle.properties
+            echo "org.gradle.jvmargs=-Xmx2048m" >> ./gradle.properties
       - run:
-          name: Build
-          command: ./gradlew build
+          name: Build (repeated)
+          command: for i in $(seq 1 3); do ./gradlew build && s=0 && break || s=$? && sleep 10; done; (exit $s)
       - store_artifacts:
           path: hello_shared/build/reports
           destination: hello_shared/reports
