@@ -1,43 +1,32 @@
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
-    application
-    kotlin("jvm")
+    kotlin("multiplatform")
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-}
-
-application.mainClassName = "cz.sazel.hellokotlin.MainKt"
-
-dependencies {
-    implementation(project(":hello_shared"))
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}
-
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "cz.sazel.hellokotlin.MainKt"
+kotlin {
+    jvmToolchain(17)
+    jvm {
+        @OptIn(ExperimentalKotlinGradlePluginApi::class)
+        mainRun {
+            mainClass = "cz.sazel.hellokotlin.MainKt"
+        }
+        withJava()
     }
 
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-
-    sourceSets["main"].java {
-        srcDir("src/main/kotlin")
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(project(":hello_shared"))
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(project(":hello_shared"))
+            }
+        }
+        val jvmMain by getting
+        val jvmTest by getting
     }
-    sourceSets["test"].java {
-        srcDir("src/test/kotlin")
-    }
-
-    // To add all of the dependencies otherwise a "NoClassDefFoundError" error
-    from(sourceSets.main.get().output)
-
-    dependsOn(configurations.runtimeClasspath)
-    from({
-        configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-    })
 }

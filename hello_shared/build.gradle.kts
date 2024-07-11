@@ -1,17 +1,15 @@
+val kotlin_version: String by extra
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
 }
 
 kotlin {
-    android {
-
+    jvmToolchain(17)
+    androidTarget {
     }
 
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -26,6 +24,26 @@ kotlin {
             }
         }
         nodejs()
+    }
+
+    applyDefaultHierarchyTemplate()
+
+//    val hostOs = System.getProperty("os.name")
+//    val isMingwX64 = hostOs.startsWith("Windows")
+//    val nativeTarget = when {
+//        //hostOs == "Mac OS X" -> macosX64("native")
+//        hostOs == "Linux" -> linuxX64("native")
+//        isMingwX64 -> mingwX64("native")
+//        else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+//    }
+//
+    listOf(
+        linuxX64("linuxX64"),
+        linuxArm64("linuxArm64"),
+//        mingwX86("mingwX86"),
+//        mingwX64("mingwX64")
+    ).forEach {
+
     }
 
     sourceSets {
@@ -45,14 +63,16 @@ kotlin {
         val jsMain by getting
 
         val jsTest by getting
+        val linuxX64Main by getting
+        val linuxArm64Main by getting
+
         val androidMain by getting {
             dependsOn(jvmMain)
         }
     }
-
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
     namespace = "cz.sazel.hellokotlin.lib"
 }

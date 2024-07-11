@@ -73,6 +73,7 @@ web/js/*
 /hello_js/web/js/
 
 .gitignore
+.kotlin
 
 node_modules
 local.properties

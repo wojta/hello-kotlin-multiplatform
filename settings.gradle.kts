@@ -1,8 +1,5 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
-
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 
     repositories {
         gradlePluginPortal()
@@ -32,10 +29,10 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        val kotlinVersion = "1.7.20"
+        val kotlinVersion = "2.0.20-Beta1"
         create("libs") {
             version("kotlin", kotlinVersion)
-            version("coroutines", "0.8.8")
+            version("coroutines", "1.8.1")
             version("appcompat", "1.5.1")
             version("androidXTestVersion", "1.4.0")
 
@@ -61,4 +58,5 @@ include(":hello_android_app")
 include(":hello_jvm_app")
 include(":hello_js_node_app")
 include(":hello_js_browser_app")
+include(":hello_console_app")
 

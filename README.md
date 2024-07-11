@@ -33,6 +33,7 @@ It's the Gradle multiple modules project.
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
 * ``hello_js_node_app`` - console application transpiled to Node.js JavaScript 
 * ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
+* ``hello_console_app`` - console application (Linux x64 & arm64)
 * ``hello_shared`` - multiplatform library project, with shared and platform specific code
     * ``commonMain`` - shared Kotlin source code, platform independent code
     * ``commonTest`` - shared tests, platform independent tests
@@ -50,20 +51,21 @@ It's the Gradle multiple modules project.
 * text output on screen is platform dependent 
     * **Android** - it's done by adding with TextView to layout
     * **Frontend JavaScript** - it adds element in DOM of HTML page
+    * **Native Console** - uses POSIX `printf`
     * **Node.js JavaScript** - uses `console.log()`
     * **JVM** -  uses `System.out.println()`
 
-_Note: Ordinary console output can be done by `println()` function from Kotlin Standard Library._
+_Note: Ordinary console output can be done by `println()` function from Kotlin Standard Library. It's only for demonstration purposes._
 
 [Implementation in modules](.images/diagram_detailed.png)
 
 ## Building and running the demo
-It was checked only under Linux Mint, probably there won't be any problems with most Unix-like environments.
+It was checked under Fedora Workstation (Linux), probably there won't be any problems with most Unix-like environments.
 
 ### Android application 
 You can use Android Studio to run the application. To build from command line, you can use
 
-    # ./gradlew hello_android_app:build
+    $ ./gradlew hello_android_app:build
 
 and APK file is located in your ``build/outputs/apk`` directory.
 
@@ -71,7 +73,7 @@ and APK file is located in your ``build/outputs/apk`` directory.
     
 ### JVM console application
 
-    # ./gradlew hello_jvm_app:build
+    $ ./gradlew hello_jvm_app:build
 
 You can than run the JAR file using `java -jar hello_jvm_app.jar` command from ``build/libs`` directory. 
 
@@ -79,7 +81,7 @@ You can than run the JAR file using `java -jar hello_jvm_app.jar` command from `
 
 ### Frontend JavaScript application
 
-    # ./gradlew hello_js_browser_app:build
+    $ ./gradlew hello_js_browser_app:build
 
 Webpack allows to host site directly from Gradle by
 
@@ -91,18 +93,25 @@ It will run locally on [http://localhost:8088/](http://localhost:8088/).
 
 ### Node.js console application
 
-    # ./gradlew hello_js_node_app:build
+    $ ./gradlew hello_js_node_app:build
 
 You can execute it in `hello_js_node_app/build/productionLibrary` directory by executing:
 
-    # node .
+    $ node .
 
 ![Hello JavaScript Node.js](.images/hello_js_node.png)
 
+
+### Native console application
+
+
+#### Emulating Arm64 on x64
+
+    $ sudo dnf install -y qemu-system-aarch64
     
 ### to see all build options    
     
-    # ./gradlew tasks --all
+    $ ./gradlew tasks --all
     
 ## License
 Do whathever you want with this. 
