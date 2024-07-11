@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master.svg?style=svg)](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master)
 
-**KOTLIN 1.7.20**
+**KOTLIN 2.0.20-Beta1**
 
 # Multiplatform Kotlin Hello World
 
@@ -9,7 +9,7 @@ This project demonstrates sharing runtime independent code between different Kot
 It uses new support for multiplatform modules with plugin `kotlin-multiplatform`.
 * [Kotlin multiplatform overview](https://kotlinlang.org/docs/multiplatform.html) 
 
-This example uses now Kotlin Multiplatform as is in Kotlin 1.7.20.
+This example uses now Kotlin Multiplatform as is in Kotlin 2.0.20-Beta1.
 
 ### Deprecated implementations
 Older implementation with `kotlin-multiplatform` plugin and various hacks was moved to [old-kotlin-1.2](https://github.com/wojta/hello-kotlin/tree/old-kotlin-1.2) branch.
@@ -104,6 +104,9 @@ You can execute it in `hello_js_node_app/build/productionLibrary` directory by e
 
 ### Native console application
 
+```
+   $ ./gradlew hello_console_app:runHello_console_appDebugExecutableLinuxX64
+```
 
 #### Emulating Arm64 on x64
 
