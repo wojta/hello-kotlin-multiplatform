@@ -5,14 +5,11 @@ plugins {
 }
 
 kotlin {
-    android {
-
+    jvmToolchain(17)
+    androidTarget {
     }
 
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -28,6 +25,8 @@ kotlin {
         }
         nodejs()
     }
+
+    applyDefaultHierarchyTemplate()
 
 //    val hostOs = System.getProperty("os.name")
 //    val isMingwX64 = hostOs.startsWith("Windows")
@@ -67,26 +66,13 @@ kotlin {
         val linuxX64Main by getting
         val linuxArm64Main by getting
 
-        val nativeMain by creating {
-            dependsOn(commonMain)
-            linuxX64Main.dependsOn(this)
-            linuxArm64Main.dependsOn(this)
-        }
-        val nativeTest by creating {
-            dependsOn(commonTest)
-            dependencies {
-                implementation(libs.kotlin.test)
-            }
-        }
-
         val androidMain by getting {
             dependsOn(jvmMain)
         }
     }
-
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 34
     namespace = "cz.sazel.hellokotlin.lib"
 }

@@ -1,6 +1,3 @@
-enableFeaturePreview("VERSION_CATALOGS")
-
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 
@@ -9,33 +6,33 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 
-//        ivy {
-//            name = "Node.js"
-//            setUrl("https://nodejs.org/dist/")
-//            patternLayout {
-//                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
-//            }
-//            metadataSources {
-//                artifact()
-//            }
-//            content {
-//                includeModule("org.nodejs", "node")
-//            }
-//        }
-//
-//        ivy("https://github.com/yarnpkg/yarn/releases/download") {
-//            name = "Yarn Distributions at $url"
-//            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-//            metadataSources { artifact() }
-//            content { includeModule("com.yarnpkg", "yarn") }
-//        }
+        ivy {
+            name = "Node.js"
+            setUrl("https://nodejs.org/dist/")
+            patternLayout {
+                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
+            }
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeModule("org.nodejs", "node")
+            }
+        }
+
+        ivy("https://github.com/yarnpkg/yarn/releases/download") {
+            name = "Yarn Distributions at $url"
+            patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+            metadataSources { artifact() }
+            content { includeModule("com.yarnpkg", "yarn") }
+        }
     }
 
     versionCatalogs {
-        val kotlinVersion = "1.7.20"
+        val kotlinVersion = "2.0.20-Beta1"
         create("libs") {
             version("kotlin", kotlinVersion)
-            version("coroutines", "0.8.8")
+            version("coroutines", "1.8.1")
             version("appcompat", "1.5.1")
             version("androidXTestVersion", "1.4.0")
 

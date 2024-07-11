@@ -33,7 +33,7 @@ It's the Gradle multiple modules project.
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
 * ``hello_js_node_app`` - console application transpiled to Node.js JavaScript 
 * ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
-* ``hello_native_app`` - console application (Linux x64 & arm64)
+* ``hello_console_app`` - console application (Linux x64 & arm64)
 * ``hello_shared`` - multiplatform library project, with shared and platform specific code
     * ``commonMain`` - shared Kotlin source code, platform independent code
     * ``commonTest`` - shared tests, platform independent tests

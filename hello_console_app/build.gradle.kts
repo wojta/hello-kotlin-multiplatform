@@ -17,6 +17,8 @@ kotlin {
         }
     }
 
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -30,21 +32,9 @@ kotlin {
             }
         }
 
-
         val linuxArm64Main by getting
         val linuxX64Main by getting
 //        val mingwX86Main by getting
 //        val mingwX64Main by getting
-
-        val consoleMain by creating {
-            dependsOn(commonMain)
-            dependencies {
-                implementation(project(":hello_shared"))
-            }
-            linuxX64Main.dependsOn(this)
-            linuxArm64Main.dependsOn(this)
-//            mingwX86Main.dependsOn(this)
-//            mingwX64Main.dependsOn(this)
-        }
     }
 }
