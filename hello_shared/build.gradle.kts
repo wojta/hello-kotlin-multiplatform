@@ -42,6 +42,8 @@ kotlin {
         linuxArm64("linuxArm64"),
 //        mingwX86("mingwX86"),
 //        mingwX64("mingwX64")
+        macosArm64(),
+        macosX64()
     ).forEach {
 
     }

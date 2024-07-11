@@ -104,13 +104,21 @@ You can execute it in `hello_js_node_app/build/productionLibrary` directory by e
 
 ### Native console application
 
+You can execute it with Gradle, if platform is not supported, the task will be skipped 
+(like trying to run Linux app under MacOS X).
+
 ```
    $ ./gradlew hello_console_app:runHello_console_appDebugExecutableLinuxX64
 ```
 
-#### Emulating Arm64 on x64
+You can find .kexe binary in the build directory and execute it from there as well.
 
-    $ sudo dnf install -y qemu-system-aarch64
+```
+   $ cd hello_console_app/build/bin/macosArm64/hello_console_appDebugExecutable
+   $ ./hello_console_app.kexe
+```
+
+![Hello MacOS](.images/hello_macos.png)
     
 ### to see all build options    
     
