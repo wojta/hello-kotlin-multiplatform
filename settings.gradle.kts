@@ -1,3 +1,12 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
 
@@ -27,31 +36,9 @@ dependencyResolutionManagement {
             content { includeModule("com.yarnpkg", "yarn") }
         }
     }
-
-    versionCatalogs {
-        val kotlinVersion = "2.0.20-Beta1"
-        create("libs") {
-            version("kotlin", kotlinVersion)
-            version("coroutines", "1.8.1")
-            version("appcompat", "1.5.1")
-            version("androidXTestVersion", "1.4.0")
-
-            //appcompat
-            library("appcompat", "androidx.appcompat", "appcompat").versionRef("appcompat")
-
-            //android test
-            library("androidx.test.runner", "androidx.test", "runner").versionRef("androidXTestVersion")
-            library("androidx.test.core", "androidx.test", "core").versionRef("androidXTestVersion")
-
-            library("kotlin-test", "org.jetbrains.kotlin", "kotlin-test").versionRef("kotlin")
-
-
-            bundle("androidx.test", listOf("androidx.test.runner", "androidx.test.core"))
-
-
-        }
-    }
 }
+
+rootProject.name = "hello_kotlin_multiplatform"
 
 include(":hello_shared")
 include(":hello_android_app")
