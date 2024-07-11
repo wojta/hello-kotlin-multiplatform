@@ -34,9 +34,9 @@ kotlin {
         }
         val jsMain by getting
     }
-//
-//    tasks.withType(Copy::class.java) {
-//        //TODO this is workaround for a bug during build, complaining about package.json being duplicated...
-//        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-//    }
+
+    tasks.withType(Copy::class.java) {
+        //TODO this is workaround for a bug during build, complaining about package.json being duplicated...
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
 }
