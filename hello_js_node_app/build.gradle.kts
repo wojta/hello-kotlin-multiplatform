@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-
 plugins {
     kotlin("multiplatform")
 }
@@ -24,7 +22,11 @@ kotlin {
                 implementation(project(":hello_shared"))
             }
         }
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.js)
+            }
+        }
     }
 }
 

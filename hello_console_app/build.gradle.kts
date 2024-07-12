@@ -9,6 +9,8 @@ kotlin {
         linuxArm64(),
 //        mingwX86(),
 //        mingwX64()
+        macosArm64(),
+        macosX64()
     ).forEach {
         it.binaries  {
             executable("hello_console_app") {

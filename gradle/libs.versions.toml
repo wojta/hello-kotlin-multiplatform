@@ -1,0 +1,28 @@
+[versions]
+agp = "8.2.2"
+androidXLifecycle="2.4.0"
+androidXTestVersion = "1.4.0"
+appcompat = "1.5.1"
+coroutines = "1.8.1"
+kotlin = "2.0.0"
+skie="0.8.2"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidXTestVersion" }
+androidx-test-core = { module = "androidx.test:core", version.ref = "androidXTestVersion" }
+androidx-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidXLifecycle" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-coroutines-js = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core-js", version.ref = "coroutines" }
+
+
+[bundles]
+androidx-test = [ "androidx-test-runner", "androidx-test-core" ]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+skie= { id="co.touchlab.skie",version.ref="skie"}

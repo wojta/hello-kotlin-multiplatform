@@ -1,8 +1,10 @@
 package cz.sazel.hellokotlin
 
 import cz.sazel.hellokotlin.console.DOMConsole
-import org.w3c.dom.events.Event
 import kotlinx.browser.document
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.w3c.dom.events.Event
 
 /**
  * main function for JavaScript
@@ -23,7 +25,9 @@ fun start(ev: Event) {
     val shared = SharedClass(DOMConsole(), Math())
     shared.platform = "JavaScript Browser"
     shared.printMe()
-    shared.printPrimes(1000)
+    GlobalScope.launch {
+        shared.printPrimes(1000)
+    }
 }
 
 

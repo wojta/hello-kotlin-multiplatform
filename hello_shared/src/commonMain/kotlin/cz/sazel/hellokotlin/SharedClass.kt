@@ -18,7 +18,7 @@ class SharedClass(val console: IConsole, val math: IMath) {
      * Prints first n prime numbers to console.
      * @param n number of primes
      */
-    fun printPrimes(n: Long) {
+    suspend fun printPrimes(n: Long) {
         for (i in calcPrimes(n)) console.println("$i")
     }
 
@@ -27,7 +27,7 @@ class SharedClass(val console: IConsole, val math: IMath) {
      * @see <a href="http://www.paul-scott.com/nth-prime.php">Source code inspired by this PHP version</a>
      * @param n number of primes
      */
-    fun calcPrimes(n: Long): List<Long> {
+    suspend fun calcPrimes(n: Long): List<Long> {
 
         val primes = arrayListOf<Long>()
         if (n > 0) primes.add(2)

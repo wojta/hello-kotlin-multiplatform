@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.js.translate.context.Namer.kotlin
-
 plugins {
     id("com.android.application")
     kotlin("multiplatform")
@@ -10,7 +8,9 @@ kotlin {
 
     androidTarget {
         dependencies {
-            implementation(libs.appcompat.get())
+            implementation(libs.appcompat)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.androidx.lifecycle)
             implementation(project(":hello_shared"))
             androidTestImplementation(libs.bundles.androidx.test)
             testImplementation(libs.kotlin.test)
