@@ -1,6 +1,6 @@
 [![CircleCI](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master.svg?style=svg)](https://circleci.com/gh/wojta/hello-kotlin-multiplatform/tree/master)
 
-**KOTLIN 2.0.20-Beta1**
+**KOTLIN 2.0.0**
 
 # Multiplatform Kotlin Hello World
 
@@ -9,7 +9,7 @@ This project demonstrates sharing runtime independent code between different Kot
 It uses new support for multiplatform modules with plugin `kotlin-multiplatform`.
 * [Kotlin multiplatform overview](https://kotlinlang.org/docs/multiplatform.html) 
 
-This example uses now Kotlin Multiplatform as is in Kotlin 2.0.20-Beta1.
+This example uses now Kotlin Multiplatform as is in Kotlin 2.0.0.
 
 ### Deprecated implementations
 Older implementation with `kotlin-multiplatform` plugin and various hacks was moved to [old-kotlin-1.2](https://github.com/wojta/hello-kotlin/tree/old-kotlin-1.2) branch.
@@ -30,6 +30,7 @@ Oldest implementation that used various hacks was moved to [old-multiplatform](h
 It's the Gradle multiple modules project. 
 
 * ``hello_android_app`` - Android application module, it's compiled to DEX bytecode, it produces APK file upon build
+* ``hello_ios_app`` - Swift application for iOS, XCode project 
 * ``hello_js_browser_app`` - application transpiled for frontend JavaScript, packed in [WebPack](https://webpack.js.org/), it's only statically served by Node.js
 * ``hello_js_node_app`` - console application transpiled to Node.js JavaScript 
 * ``hello_jvm_app`` - console application compiled to Java bytecode for JVM, produces JAR that can be executed by eg. Oracle JVM
@@ -50,6 +51,7 @@ It's the Gradle multiple modules project.
 * prime number calculation is platform independent, single code shared for all platforms 
 * text output on screen is platform dependent 
     * **Android** - it's done by adding with TextView to layout
+    * **iOS** - stores lines in `ArrayList`, then it passes it through `Flow` and uses [SKIE](https://skie.touchlab.co/features/flows-in-swiftui) `Observing` on iOS Swift app end
     * **Frontend JavaScript** - it adds element in DOM of HTML page
     * **Native Console** - uses POSIX `printf`
     * **Node.js JavaScript** - uses `console.log()`
@@ -70,7 +72,14 @@ You can use Android Studio to run the application. To build from command line, y
 and APK file is located in your ``build/outputs/apk`` directory.
 
 ![Hello Android](.images/hello_android.png)
-    
+
+### iOS application
+
+It's in directory `hello_ios_app`. It's XCode project with SwiftUI application. `hello_shared` uses [SKIE](https://skie.touchlab.co/intro) library 
+to improve interoperability. 
+
+![Hello iOS](.images/hello_ios.png)
+
 ### JVM console application
 
     $ ./gradlew hello_jvm_app:build
