@@ -2,13 +2,16 @@ package cz.sazel.hellokotlin
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import cz.sazel.hellokotlin.console.AndroidConsole
 import cz.sazel.hellokotlin.console.IConsole
 import cz.sazel.hellokotlin.databinding.ActivityMainBinding
+import cz.sazel.hellokotlin.jvm.Math
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 /**
  * In Android this activity is a start point.
@@ -33,16 +36,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun calcPrimes(n: Long) = sharedClass.calcPrimes(n)
-
     private fun startClick() {
         sharedClass.printMe()
-        //we can't have direct sharedClass.printPrimes(1000) there, we need to do it asynchronously to not block the UI
-        async {
-            val primes: List<Long> = calcPrimes(1000)
-            val output = primes.map { prime -> prime.toString() }.reduce { s1, s2 -> s1 + "\n" + s2 }
-            console.println(output)
+        lifecycleScope.launch(Dispatchers.IO) {
+            sharedClass.printPrimes(1000)
         }
     }
-
 }

@@ -32,7 +32,6 @@ kotlin {
                 implementation(project(":hello_shared"))
             }
         }
-        val jsMain by getting
     }
 
     tasks.withType(Copy::class.java) {

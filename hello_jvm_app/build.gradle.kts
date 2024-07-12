@@ -18,6 +18,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":hello_shared"))
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
         val commonTest by getting {

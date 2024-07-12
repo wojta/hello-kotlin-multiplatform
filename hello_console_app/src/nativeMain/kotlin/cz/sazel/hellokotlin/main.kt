@@ -1,22 +1,18 @@
 package cz.sazel.hellokotlin
 
 import cz.sazel.hellokotlin.console.Console
+import kotlinx.coroutines.runBlocking
 
 /**
- * main function for JavaScript
+ * main function
  */
 fun main() {
-    start()
-}
-
-/**
- * We start this function from <button onClick="
- */
-fun start() {
     val shared = SharedClass(Console(), Math())
     shared.platform = "Native ${arch()}"
     shared.printMe()
-    shared.printPrimes(1000)
+    runBlocking {
+        shared.printPrimes(1000)
+    }
 }
 
 

@@ -1,6 +1,7 @@
 val kotlin_version: String by extra
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.skie)
     kotlin("multiplatform")
 }
 
@@ -42,15 +43,24 @@ kotlin {
         linuxArm64("linuxArm64"),
 //        mingwX86("mingwX86"),
 //        mingwX64("mingwX64")
+        iosArm64(),
+        iosSimulatorArm64(),
         macosArm64(),
         macosX64()
     ).forEach {
-
+        if (it.name.startsWith("ios")) {
+            it.binaries.framework {
+                baseName = "hello_shared"
+                isStatic = true
+            }
+        }
     }
 
     sourceSets {
         val commonMain by getting {
-
+            dependencies {
+                implementation(libs.kotlinx.coroutines.core)
+            }
         }
         val commonTest by getting {
             dependencies {
@@ -62,16 +72,30 @@ kotlin {
         }
         val jvmTest by getting
 
-        val jsMain by getting
+        val jsMain by getting {
+            dependencies {
+                implementation(libs.kotlinx.coroutines.js)
+            }
+        }
 
         val jsTest by getting
         val linuxX64Main by getting
         val linuxArm64Main by getting
+        val nativeMain by getting
+        val iosMain by getting {
+            dependsOn(nativeMain)
+        }
 
         val androidMain by getting {
             dependsOn(jvmMain)
         }
     }
+}
+
+skie {
+   features {
+      enableSwiftUIObservingPreview = true
+   }
 }
 
 android {
