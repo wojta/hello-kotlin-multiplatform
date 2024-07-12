@@ -17,7 +17,7 @@ struct ContentView: View {
                 }
             }
             ScrollView {
-                LazyVStack {
+                LazyVStack(alignment: HorizontalAlignment.leading) {
                     Observing(console.linesFlow) {
                         Text("Press start")
                     } content: { lines in
@@ -28,7 +28,7 @@ struct ContentView: View {
                 }
                 Spacer()
             }
-        }
+        }.padding([.all], 16)
     }
 }
 
