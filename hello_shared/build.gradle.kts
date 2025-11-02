@@ -88,14 +88,17 @@ kotlin {
 
         val androidMain by getting {
             dependsOn(jvmMain)
+            dependencies {
+                implementation(libs.appcompat)
+            }
         }
     }
 }
 
 skie {
-   features {
-      enableSwiftUIObservingPreview = true
-   }
+    features {
+        enableSwiftUIObservingPreview = true
+    }
 }
 
 android {
