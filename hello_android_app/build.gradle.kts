@@ -5,22 +5,33 @@ plugins {
 
 kotlin {
     jvmToolchain(17)
+    androidTarget()
 
-    androidTarget {
-        dependencies {
-            implementation(libs.appcompat)
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.androidx.lifecycle)
-            implementation(project(":hello_shared"))
-            androidTestImplementation(libs.bundles.androidx.test)
-            testImplementation(libs.kotlin.test)
+    sourceSets {
+        androidMain {
+            dependencies {
+                implementation(libs.appcompat)
+                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.androidx.lifecycle)
+            }
+        }
+        commonMain {
+            dependencies {
+                implementation(project(":hello_shared"))
+            }
+        }
+
+        commonTest {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
         }
     }
 }
 
 android {
-    compileSdk = 34
-    namespace= "cz.sazel.hellokotlin"
+    compileSdk = 36
+    namespace = "cz.sazel.hellokotlin"
 
     buildFeatures {
         viewBinding = true

@@ -1,6 +1,8 @@
 package cz.sazel.hellokotlin
 
 import cz.sazel.hellokotlin.console.IConsole
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Shared multiplatform code written in Kotlin
@@ -19,7 +21,10 @@ class SharedClass(val console: IConsole, val math: IMath) {
      * @param n number of primes
      */
     suspend fun printPrimes(n: Long) {
-        for (i in calcPrimes(n)) console.println("$i")
+        val primes = calcPrimes(n)
+        primes.forEachIndexed { i, _ ->
+            console.println("${primes[i]}")
+        }
     }
 
     /**

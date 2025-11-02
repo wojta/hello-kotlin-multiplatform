@@ -4,7 +4,7 @@ plugins {
 
 kotlin {
     js(IR) {
-        binaries.library()
+        binaries.executable()
         nodejs {
             useCommonJs()
         }
